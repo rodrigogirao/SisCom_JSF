@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	
+		<p:panel header="#{msg['aluno.atualizar.aluno']}">
+			<h:panelGrid columns="3" cellpadding="10">
+				<p:outputLabel value="#{msg['aluno.nome']}" />
+				<p:inputText id="nome" value="#{alunoController.aluno.nome}" required="true"
+					requiredMessage="#{msg['campo.obrigatorio']}" />
+				<p:message for="nome" />
+
+				<p:outputLabel value="#{msg['aluno.data']}" />
+				<p:inputText id="data"
+					value="#{alunoController.aluno.dataNascimento}"
+					converterMessage="#{msg['campo.data.invalida']}" required="true"
+					requiredMessage="#{msg['campo.obrigatorio']}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:inputText>
+				<p:message for="data" />
+
+				<p:outputLabel value="#{msg['aluno.matricula']}" />
+				<p:inputText id="matricula" value="#{alunoController.aluno.matricula}"
+					required="true" requiredMessage="#{msg['campo.obrigatorio']}"
+					validatorMessage="#{msg['campo.validar.matricula']}">
+					<f:validateLength maximum="7" />
+				</p:inputText>
+				<p:message for="matricula" />
+
+				<p:outputLabel value="#{msg['aluno.login']}" />
+				<p:inputText id="login" value="#{alunoController.aluno.login}" required="true"
+					requiredMessage="#{msg['campo.obrigatorio']}"
+					validatorMessage="#{msg['campo.validar.login']}">
+					<f:validateLength maximum="6" />
+				</p:inputText>
+				<p:message for="login" />
+
+				<p:outputLabel value="#{msg['aluno.senha']}" />
+				<p:password id="nonFeedback" value="#{alunoController.aluno.senha}"
+					required="true" requiredMessage="#{msg['campo.obrigatorio']}"
+					validatorMessage="#{msg['campo.validar.senha']}">
+					<f:validateLength minimum="5" maximum="8" />
+				</p:password>
+				<p:message for="nonFeedback" />
+
+				<p:outputLabel value="#{msg['aluno.disciplina']}" />
+				<p:selectManyMenu id="scroll"
+					value="#{alunoController.aluno.disciplinas}">
+					<f:selectItems value="#{alunoController.allDisciplinas}"
+						var="disciplina" itemLabel="#{disciplina.nome}"
+						itemValue="#{disciplina}" />
+				</p:selectManyMenu>
+				<br/>
+
+				<p:commandButton type="submit" value="#{msg['botao.atualizar']}"
+					action="#{alunoController.atualizarAluno}" ajax="false" />
+				<p:commandButton value="#{msg['botao.voltar']}"
+					action="listarAlunos.xhtml" ajax="false" immediate="true" />
+
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</h:html>

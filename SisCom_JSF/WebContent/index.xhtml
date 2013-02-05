@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+
+		<p:panel header="#{msg['login']}">
+			<h:panelGrid columns="3" cellpadding="10">
+
+				<p:outputLabel value="#{msg['login']}" />
+				<p:inputText id="login" value="#{loginController.login}"
+					required="true" label="#{msg['login']}"
+					requiredMessage="#{msg['campo.obrigatorio']}" />
+				<p:message for="login" />
+
+				<p:outputLabel value="#{msg['senha']}" />
+				<p:password id="senha" value="#{loginController.senha}"
+					required="true" label="#{msg['senha']}"
+					requiredMessage="#{msg['campo.obrigatorio']}" />
+				<p:message for="senha" />
+
+				<p:outputLabel value="#{msg['conta']}" />
+
+				<p:selectOneMenu value="#{loginController.tipoLogin}">
+					<f:selectItem itemLabel="#{msg['seleciona']}" itemValue="" />
+					<f:selectItem itemLabel="#{msg['aluno']}" itemValue="aluno" />
+					<f:selectItem itemLabel="#{msg['orientador']}"
+						itemValue="orientador" />
+					<f:selectItem itemLabel="#{msg['monitor']}" itemValue="monitor" />
+					<f:selectItem itemLabel="#{msg['administradoor']}"
+						itemValue="administrador" />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+			<br />
+			<p:commandButton value="#{msg['botao.entrar']}"
+				action="#{loginController.validarLogin}" ajax="false" />
+		</p:panel>
+	</ui:define>
+</ui:composition>
+
+</html>

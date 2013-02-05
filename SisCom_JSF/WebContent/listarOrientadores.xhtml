@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	<p:panel header="Listar Disciplinas">
+			<h:panelGrid columns="3" cellpadding="10">
+
+		<p:dataTable value="#{orientadorController.orientadores}"
+			var="orientador" styleClass="table" headerClass="table-header">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['orientador.nome']}" />
+				</f:facet>
+				<h:commandLink action="atualizarOrientador.xhtml" ajax="false">
+					<h:outputText value="#{orientador.nome}" />
+					<f:setPropertyActionListener
+						target="#{orientadorController.orientador}" value="#{orientador}" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['orientador.siape']}" />
+				</f:facet>
+				<h:outputText value="#{orientador.siape}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['aluno.data']}" />
+				</f:facet>
+				<h:outputText value="#{orientador.dataNascimento}" >
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+	
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['orientador.senha']}" />
+				</f:facet>
+				<h:outputText value="#{orientador.senha}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['orientador.login']}" />
+				</f:facet>
+				<h:outputText value="#{orientador.login}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['deletar']}" />
+				</f:facet>
+				<h:commandLink value="#{msg['deletar']}"
+					action="#{orientadorController.deletarOrientador}" ajax="false">
+					<f:setPropertyActionListener value="#{orientador}"
+						target="#{orientadorController.orientador}" />
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		</p:panel>
+		<br/>
+		<p:commandButton value="#{msg['link.voltar']}"
+			action="menuAdministrador.xhtml" ajax="false" />
+		
+	</ui:define>
+	</ui:composition>
+
+</html>

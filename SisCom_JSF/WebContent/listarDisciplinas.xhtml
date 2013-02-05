@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+	<p:panel header="Listar Disciplinas">
+			<h:panelGrid columns="3" cellpadding="10">
+		<p:dataTable value="#{disciplinaController.disciplinas}"
+			var="disciplina" styleClass="table" headerClass="table-header">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['disciplina.nome']}" />
+				</f:facet>
+				<h:commandLink action="atualizarDisciplina.xhtml" ajax="false">
+					<h:outputText value="#{disciplina.nome}" />
+					<f:setPropertyActionListener
+						target="#{disciplinaController.disciplina}" value="#{disciplina}" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['disciplina.codigo']}" />
+				</f:facet>
+				<h:outputText value="#{disciplina.codigo}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['deletar']}" />
+				</f:facet>
+				<h:commandLink value="#{msg['deletar']}"
+					action="#{disciplinaController.deletarDisciplina}" ajax="false">
+					<f:setPropertyActionListener value="#{disciplina}"
+						target="#{disciplinaController.disciplina}" />
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		</p:panel>
+		<br/>
+		<p:commandButton value="#{msg['link.voltar']}"
+			action="menuAdministrador.xhtml" ajax="false" />
+	</ui:define>
+	</ui:composition>
+</html>

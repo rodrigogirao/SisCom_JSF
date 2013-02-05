@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+<ui:define name="conteudo">
+	
+		<h:inputHidden value="#{orientadorController.orientador.id}" />
+		<p:panel header="Atualizar Orientador">
+		<h:panelGrid columns="3" cellpadding="10">
+
+			<p:outputLabel value="#{msg['orientador.nome']}" />
+			<p:inputText value="#{orientadorController.orientador.nome}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message/>
+			
+			<p:outputLabel value="#{msg['aluno.data']}" />
+			<p:inputText id ="data" value="#{orientadorController.orientador.dataNascimento}" converterMessage="#{msg['campo.data.invalida']}"
+			required="true" requiredMessage="#{msg['campo.obrigatorio']}">
+			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</p:inputText>
+			<p:message/>
+			
+			<p:outputLabel value="#{msg['orientador.siape']}" />
+			<p:inputText value="#{orientadorController.orientador.siape}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message/>
+			
+			<p:outputLabel value="#{msg['orientador.senha']}" />
+			<p:inputText value="#{orientadorController.orientador.senha}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message/>
+			
+			<p:outputLabel value="#{msg['orientador.login']}" />
+			<p:inputText value="#{orientadorController.orientador.login}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message/>
+
+			<p:commandButton type="submit" value="#{msg['botao.atualizar']}" ajax="false"
+				action="#{orientadorController.atualizarOrientador}" />
+			<p:commandButton type="submit" value="#{msg['botao.voltar']}" ajax="false"
+				action="listarOrientadores.xhtml" immediate="true"/>
+
+		</h:panelGrid>
+		</p:panel>
+	</ui:define>
+	</ui:composition>
+</html>

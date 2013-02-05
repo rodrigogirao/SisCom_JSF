@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="conteudo">
+
+		<p:panel header="#{msg['disciplina.cadastro.disciplina']}">
+
+			<h:panelGrid columns="3" cellpadding="10">
+				<p:outputLabel value="#{msg['disciplina.nome']}" />
+				<p:inputText id="nome"
+					value="#{disciplinaController.disciplina.nome}" required="true"
+					label="#{msg['disciplina.nome']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
+				<p:message for="nome" />
+
+
+				<p:outputLabel value="#{msg['disciplina.codigo']}" />
+				<p:inputText id="codigo"
+					value="#{disciplinaController.disciplina.codigo}" required="true"
+					label="#{msg['disciplina.codigo']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
+				<p:message for="codigo" />
+
+				<p:commandButton value="#{msg['botao.cadastrar']}" ajax="false"
+					action="#{disciplinaController.cadastrarDisciplina}" />
+
+				<p:commandButton value="#{msg['botao.voltar']}"
+					action="menuAdministrador.xhtml" ajax="false" immediate="true" />
+			</h:panelGrid>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>
