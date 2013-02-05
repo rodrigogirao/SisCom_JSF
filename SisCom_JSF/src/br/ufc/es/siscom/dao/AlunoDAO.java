@@ -1,8 +1,6 @@
 package br.ufc.es.siscom.dao;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,25 +21,30 @@ public class AlunoDAO{
 	public static ArrayList<Aluno> retornarAlunos() {
 		Session session = CriarTabelas.preparaSessao();
 		ArrayList<Aluno> alunos = (ArrayList<Aluno>) session.createCriteria(Aluno.class).list();
+		session.close();
 		return alunos;
 
     }
 	
 	public static Aluno retornaAlunoPorLogin(String login){
 		Session session = CriarTabelas.preparaSessao();
-		return (Aluno) session.createCriteria(Aluno.class).add(Restrictions.eq("login", login)).uniqueResult();
-	
+		Aluno aluno = (Aluno) session.createCriteria(Aluno.class).add(Restrictions.eq("login", login)).uniqueResult();
+		session.close();
+		return aluno;
 	}
 	
 	public static ArrayList<Aluno> retornaAlunosPorNome(String nome) {
 		Session session = CriarTabelas.preparaSessao();
-		return (ArrayList<Aluno>) session.createCriteria(Aluno.class).add(Restrictions.like("nome", nome)).list();
+		ArrayList<Aluno> alunos = (ArrayList<Aluno>) session.createCriteria(Aluno.class).add(Restrictions.like("nome", nome)).list();
+		session.close();
+		return alunos;
 	}
 	
 	public static Aluno retornaAlunoPorMatricula(String matricula){
 		Session session = CriarTabelas.preparaSessao();
-		return (Aluno) session.createCriteria(Aluno.class).add(Restrictions.eq("matricula", matricula)).uniqueResult();
-	
+		Aluno aluno = (Aluno) session.createCriteria(Aluno.class).add(Restrictions.eq("matricula", matricula)).uniqueResult();
+		session.close();
+		return aluno;
 	}
 	
 	public static void deletarAluno(Aluno aluno){

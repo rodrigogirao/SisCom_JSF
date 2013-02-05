@@ -26,6 +26,7 @@ public class DisciplinaDAO {
 	public static List<Disciplina> retornarDisciplinas() {
 		Session session = CriarTabelas.preparaSessao();
 		ArrayList<Disciplina> disciplinas = (ArrayList<Disciplina>) session.createCriteria(Disciplina.class).list();
+		session.close();
 		return disciplinas;
 
     }
@@ -47,7 +48,9 @@ public class DisciplinaDAO {
 		String hql = "from Disciplina disciplina where disciplina.codigo like ?";
 		
 		Query query = (Query) session.createQuery(hql).setString(0, codigo);
-		return (Disciplina) query.uniqueResult();
+		Disciplina disciplina = (Disciplina) query.uniqueResult();
+		session.close();
+		return disciplina;
 	}
 	public static void deletarDisciplina(Disciplina disciplina)
 	{

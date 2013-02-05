@@ -21,7 +21,9 @@ public class OrientadorDAO {
 	
 	public static List<Orientador> retornarTodosOsOrientadores() {
 		Session session = CriarTabelas.preparaSessao();
-		return session.createCriteria(Orientador.class).list();
+		List<Orientador> orientadores = session.createCriteria(Orientador.class).list();
+		session.close();
+		return orientadores;
 	}
 	
 	public static void deletarOrientador(Orientador orientador)
