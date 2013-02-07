@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="conteudo">
+<p:panel header="Monitorar Aluno">
+			<h:panelGrid columns="3" cellpadding="10">
+	
+		<p:dataTable value="#{alunoController.alunos}" var="aluno">
+			<p:column>
+
+				<f:facet name="header">
+					<h:outputText value="#{msg['aluno.nome']}" />
+				</f:facet>
+					<h:outputText value="#{aluno.nome}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['aluno.matricula']}" />
+				</f:facet>
+				<h:outputText value="#{aluno.matricula}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg['aluno.monitorar']}" />
+				</f:facet>
+				<h:commandLink value="#{msg['aluno.monitorar']}"
+					action="#{alunoController.monitorarAluno}" ajax="false">
+					<f:setPropertyActionListener target="#{alunoController.aluno}" value="#{aluno}" />
+				</h:commandLink>
+		    </p:column>
+		    </p:dataTable>
+		    </h:panelGrid>
+		    </p:panel>
+		    </ui:define>
+		    </ui:composition>
+
+</h:html>
