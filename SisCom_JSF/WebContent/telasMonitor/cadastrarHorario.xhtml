@@ -14,18 +14,19 @@
 			<h:panelGrid columns="3" cellpadding="10">
 
 				<p:outputLabel value="#{msg['monitor.horaInicio']}" />
-				<p:inputText id="nome" value="#{horarioController.horario.horaInicio}"
+				<p:inputText id="horaInicio" value="#{horarioController.horario.horaInicio}"
 					required="true" label="#{msg['aluno.nome']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
-				<p:message for="nome" />
+				
+				<p:message for="horaInicio" />
 
 				<p:outputLabel value="#{msg['monitor.horaFim']}" />
-				<p:inputText id="matricula"
+				<p:inputText id="horaFim"
 					value="#{horarioController.horario.horaFim}" required="true"
 					label="#{msg['aluno.matricula']}"
-					validatorMessage="#{msg['campo.validar.matricula']}" requiredMessage="#{msg['campo.obrigatorio']}">
-					<f:validateLength maximum="7" />
+					requiredMessage="#{msg['campo.obrigatorio']}">
+					
 				</p:inputText>
-				<p:message for="matricula" />
+				<p:message for="horaFim" />
 				
 				<p:outputLabel value="#{msg['data']}" />
 				<p:inputText id="data"
@@ -35,7 +36,16 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</p:inputText>
 				<p:message for="data" />
-
+				
+				<p:outputLabel value="#{msg['disciplina']}" />
+				<p:selectOneMenu id="disciplina" value="#{horarioController.disciplinaSelecionada}" label="#{msg['aluno.escolherDisciplina']}"
+					required="true" requiredMessage="#{msg['campo.obrigatorio']}" >
+					<f:selectItem itemLabel="#{msg['seleciona']}" itemValue="" />
+					<f:selectItems value="#{monitorController.todasDisciplinas}" />		
+				</p:selectOneMenu>
+				
+				<p:message for="disciplina" />
+				
 				<p:commandButton value="#{msg['botao.cadastrar']}"
 					action="#{horarioController.salvar}" ajax="false" />
 				<p:commandButton value="#{msg['botao.voltar']}"

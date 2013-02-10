@@ -6,7 +6,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.ufc.es.siscom.dao.DisciplinaDAO;
 import br.ufc.es.siscom.dao.HorarioDAO;
+import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
 
 
@@ -15,6 +17,7 @@ import br.ufc.es.siscom.model.Horario;
 public class HorarioController {
 	
 	private Horario horario = new Horario();
+	private String disciplinaSelecionada;
 	
 	public String salvar(){
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
@@ -22,8 +25,15 @@ public class HorarioController {
 		LoginController loginController =  (LoginController) session.getAttribute("loginController");
 		horario.gerarCodigoHorario();
 		horario.setMonitor(loginController.getMonitor());
+		Disciplina disciplina = DisciplinaDAO.retornarDisciplinaPorNome(disciplinaSelecionada);
+		horario.setDisciplina(disciplina);
 		HorarioDAO.adicionarHorario(horario);
 		horario = new Horario();
+		return "monitorInicial.xhtml";
+	}
+	
+	public String deletarHorario(){
+		HorarioDAO.deletarHorario(horario);
 		return "monitorInicial.xhtml";
 	}
 
@@ -33,6 +43,14 @@ public class HorarioController {
 
 	public void setHorario(Horario horario) {
 		this.horario = horario;
+	}
+
+	public String getDisciplinaSelecionada() {
+		return disciplinaSelecionada;
+	}
+
+	public void setDisciplinaSelecionada(String disciplinaSelecionada) {
+		this.disciplinaSelecionada = disciplinaSelecionada;
 	}
 
 }

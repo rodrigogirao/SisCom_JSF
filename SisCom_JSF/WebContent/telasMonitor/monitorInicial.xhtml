@@ -37,6 +37,24 @@
 							<f:convertDateTime dateStyle="short" pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msg['disciplina']}" />
+						</f:facet>
+						<h:outputText value="#{horario.disciplina.nome}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="#{msg['deletar']}" />
+						</f:facet>
+						<p:commandLink value="#{msg['deletar']}"
+							action="#{horarioController.deletarHorario}" ajax="false">
+							<f:setPropertyActionListener target="#{horarioController.horario}"
+								value="#{horario}" />
+						</p:commandLink>
+					</p:column>
 
 
 				</p:dataTable>

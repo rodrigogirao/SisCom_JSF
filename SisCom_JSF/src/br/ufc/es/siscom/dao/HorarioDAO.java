@@ -2,6 +2,7 @@ package br.ufc.es.siscom.dao;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Horario;
@@ -36,6 +37,16 @@ public class HorarioDAO {
 		sessao.save(horario);
 		sessao.getTransaction().commit();
 	}
+	
+	public static void deletarHorario(Horario horario){
+		Session session = CriarTabelas.preparaSessao();
+		Transaction transaction = session.beginTransaction();
+		Horario horarioDB = (Horario) session.load(Horario.class, horario.getId());
+		session.delete(horarioDB);
+		transaction.commit();
+		session.close();
+	}
+	
 //	public static void associarAlunoAoHorario(long id, Aluno aluno) {
 //		Session sessao = CriarTabelas.preparaSessao();
 //		sessao.beginTransaction();

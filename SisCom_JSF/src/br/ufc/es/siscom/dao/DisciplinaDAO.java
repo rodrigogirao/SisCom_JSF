@@ -44,7 +44,7 @@ public class DisciplinaDAO {
 		
 	}
 	
-	private static Disciplina retornarDisciplinaPorNome(String nomeDisciplina) {
+	public static Disciplina retornarDisciplinaPorNome(String nomeDisciplina) {
 		Session session = CriarTabelas.preparaSessao();
 		Disciplina disciplina = (Disciplina) session.createCriteria(Disciplina.class).add(Restrictions.eq("nome", nomeDisciplina)).uniqueResult();
 		session.close();

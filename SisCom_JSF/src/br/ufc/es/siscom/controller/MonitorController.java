@@ -29,6 +29,7 @@ public class MonitorController {
 	private Map<String, String> todasDisciplinas;
 	
 	
+	
 	public String deletarMonitor(){
 		MonitorDAO.deletarMonitor(monitor);
 		return "orientadorInicial.xhtml";
