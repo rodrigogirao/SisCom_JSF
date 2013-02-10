@@ -51,12 +51,9 @@
 				<p:message for="nonFeedback" />
 
 				<p:outputLabel value="#{msg['aluno.disciplina']}" />
-				<p:selectManyMenu id="scroll"
-					value="#{alunoController.aluno.disciplinas}">
-					<f:selectItems value="#{alunoController.allDisciplinas}"
-						var="disciplina" itemLabel="#{disciplina.nome}"
-						itemValue="#{disciplina}" />
-				</p:selectManyMenu>
+				<p:selectCheckboxMenu value="#{alunoController.nomeDisciplinasSelecionadas}" label="#{msg['aluno.escolherDisciplina']}" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:420px">  
+        				<f:selectItems value="#{alunoController.todasDisciplinas}" />  
+    			</p:selectCheckboxMenu>
 				<br/>
 
 				<p:commandButton type="submit" value="#{msg['botao.atualizar']}"

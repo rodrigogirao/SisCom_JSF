@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.model.SelectItem;
 
 import br.ufc.es.siscom.dao.AlunoDAO;
 import br.ufc.es.siscom.dao.DisciplinaDAO;
@@ -56,22 +55,12 @@ public class AlunoController {
 	}
 	
 	public String atualizarAluno(){
+		List<Disciplina> disciplinasAluno = DisciplinaDAO.retornarListaDeDisciplinaPorListaDeNomes(nomeDisciplinasSelecionadas);
+		aluno.setDisciplinas(disciplinasAluno);
 		AlunoDAO.atualizarAluno(aluno);
 		aluno = new Aluno();
 		return "listarAlunos.xhtml";
 	}
-
-//	public List<SelectItem> getAllDisciplinas() {
-//		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
-//		List<SelectItem> lista = new ArrayList<SelectItem>();
-//		int i=0;
-//		for (Disciplina disciplina : disciplinass) {
-//			
-//			lista.add(new SelectItem(new Integer(i),disciplina.getNome()));
-//			i++;
-//		}
-//		return lista;
-//	}
 		
 	public String retornarAlunos(){
 			this.alunos = AlunoDAO.retornarAlunos();

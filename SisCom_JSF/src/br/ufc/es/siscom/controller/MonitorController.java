@@ -19,9 +19,18 @@ import br.ufc.es.siscom.model.Monitor;
 public class MonitorController {
 	private Monitor monitor = new Monitor();
 	private List<Horario> horarios;
+	private List<Horario> horariosSessao;
 	
 	
+	public String deletarMonitor(){
+		MonitorDAO.deletarMonitor(monitor);
+		return "orientadorInicial.xhtml";
+	}
 	
+	public String verHorarios(){
+		setHorarios(MonitorDAO.retornaHorariosPorMatriculaDoMonitor(monitor.getMatricula()));
+		return "horariosMonitor.xhtml";
+	}
 	
 	public Monitor getMonitor() {
 		return monitor;
@@ -29,13 +38,21 @@ public class MonitorController {
 	public void setMonitor(Monitor monitor) {
 		this.monitor = monitor;
 	}
-	public List<Horario> getHorarios() {
+	public List<Horario> getHorariosSessao() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
 		LoginController loginController =  (LoginController) session.getAttribute("loginController");
-		horarios = MonitorDAO.retornaHorariosPorMatriculaDoMonitor(loginController.getMonitor().getMatricula());
+		horariosSessao = MonitorDAO.retornaHorariosPorMatriculaDoMonitor(loginController.getMonitor().getMatricula());
+		return horariosSessao;
+	}
+	public void setHorariosSessao(List<Horario> horarios) {
+		this.setHorarios(horarios);
+	}
+
+	public List<Horario> getHorarios() {
 		return horarios;
 	}
+
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
 	}

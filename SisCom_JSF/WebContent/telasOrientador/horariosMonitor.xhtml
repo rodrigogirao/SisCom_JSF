@@ -11,9 +11,14 @@
 
 <ui:composition template="/templates/templateOrientador.xhtml">
 	<ui:define name="conteudo">
-		<p:panel header="#{msg['monitor']}">
+		<p:panel header="#{msg['horariosMonitor']}">
 			<h:panelGrid columns="3" cellpadding="10">
-				<p:dataTable value="#{monitorController.horariosSessao}" var="horario">
+				<p:dataTable value="#{monitorController.horarios}" var="horario">
+					
+						<f:facet name="header">
+							<h:outputText value="#{monitorController.monitor.nome}" />
+						</f:facet>
+					
 					<p:column>
 
 						<f:facet name="header">
@@ -37,11 +42,17 @@
 							<f:convertDateTime dateStyle="short" pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-
+					
+					<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="#{msg['disciplina']}" />
+					</f:facet>
+<!-- 					<h:outputText value="#{horario.disciplina}" /> -->
+					</p:column>
 
 				</p:dataTable>
 			</h:panelGrid>
-			<p:commandButton value="#{msg['botao.cadastrarHorario']}" action="cadastrarHorario.xhtml" ajax="false" />
+			<p:commandButton value="#{msg['botao.voltar']}" action="orientadorInicial.xhtml" ajax="false"/>
 		</p:panel>
 	</ui:define>
 </ui:composition>

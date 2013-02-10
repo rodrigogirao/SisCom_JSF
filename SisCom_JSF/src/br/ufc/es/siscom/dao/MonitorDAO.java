@@ -3,8 +3,10 @@ package br.ufc.es.siscom.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
@@ -18,7 +20,16 @@ public class MonitorDAO {
 		session.save(monitor);
 		session.beginTransaction().commit();
 		session.close();
-		}
+	}
+	
+	public static void deletarMonitor(Monitor monitor){
+		Session session = CriarTabelas.preparaSessao();
+		Transaction transaction = session.beginTransaction();
+		Monitor monitorDB = (Monitor) session.load(Monitor.class, monitor.getId());
+		session.delete(monitorDB);
+		transaction.commit();
+		session.close();
+	}
 	
 
 	public static void associarOrientadorMonitor(long idAluno, Orientador orientador){
@@ -70,8 +81,7 @@ public class MonitorDAO {
 		return monitores;
 	}
 	
-	
-	
+		
 	public static List<Horario> retornaHorariosPorMatriculaDoMonitor(String matricula){
 		Monitor monitor = MonitorDAO.retornaMonitorPorMatricula(matricula);
 		Session session = CriarTabelas.preparaSessao();

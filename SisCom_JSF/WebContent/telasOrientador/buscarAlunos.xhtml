@@ -12,12 +12,12 @@
 <ui:composition template="/templates/templateOrientador.xhtml">
 	<ui:define name="conteudo">
 		<p:panel header="#{msg['buscarAlunos']}">
-			<h:panelGrid columns="3" cellpadding="10">
+			<h:panelGrid columns="2" cellpadding="10">
 
 				<p:outputLabel value="#{msg['aluno.nome']}" />
 				<p:inputText id="nome" value="#{alunoController.nomeAluno}"
-					required="true" label="#{msg['aluno.nome']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
-				<p:message for="nome" />
+					label="#{msg['aluno.nome']}" />
+				
 			</h:panelGrid>
 			<p:commandButton value="#{msg['botao.buscarAlunos']}" action="#{alunoController.buscarAlunos}" ajax="false"/>
 			<p:commandButton value="#{msg['botao.voltar']}" action="orientadorInicial.xhtml" ajax="false"/>

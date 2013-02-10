@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -34,7 +35,7 @@ public class Monitor implements Serializable{
 	@OneToMany(mappedBy="monitor")
 	private List<Horario> horariosMonitor = new ArrayList<Horario>();
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Monitor_Disciplina", 
 			joinColumns = { @JoinColumn(name = "id_monitor") }, 
 			inverseJoinColumns = { @JoinColumn(name = "id_codigo") })

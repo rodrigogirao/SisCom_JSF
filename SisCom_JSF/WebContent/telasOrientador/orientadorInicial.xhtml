@@ -30,15 +30,43 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 				<p:outputLabel value="#{monitor.matricula}" />
 			</p:column>
 			
-<!-- 			<p:column> -->
-<!-- 				<f:facet name="header"> -->
-<!-- 					<h:outputText value="#{msg['aluno.monitorar']}" /> -->
-<!-- 				</f:facet> -->
-<!-- 				<p:commandLink value="#{msg['aluno.monitorar']}" -->
-<!-- 					action="#{monitorController.monitorarAluno}" ajax="false"> -->
-<!-- 					<f:setPropertyActionListener target="#{monitorController.monitor}" value="#{monitor}" /> -->
-<!-- 				</p:commandLink> -->
-<!-- 		    </p:column> -->
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="#{msg['horariosMonitor']}" />
+				</f:facet>
+				<p:commandLink value="#{msg['horariosMonitor']}"
+							action="#{monitorController.verHorarios}" ajax="false">
+							<f:setPropertyActionListener target="#{monitorController.monitor}"
+								value="#{monitor}" />
+			</p:commandLink> 
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="#{msg['monitor.disciplinas']}" />
+				</f:facet>
+				<p:dataList id="scroll" itemType="circle"
+				value="#{monitor.disciplinas}" var="disciplina">
+				#{disciplina.nome}
+			</p:dataList>
+			<p:commandLink value="#{msg['gerenciarDisciplinas']}"
+							action="gerenciarDisciplinas.xhtml" ajax="false">
+							<f:setPropertyActionListener target="#{monitorController.monitor}"
+								value="#{monitor}" />
+			</p:commandLink>
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="#{msg['deixarOrientacao']}" />
+				</f:facet>
+				<p:commandLink value="#{msg['deixarOrientacao']}"
+							action="#{monitorController.deletarMonitor}" ajax="false">
+							<f:setPropertyActionListener target="#{monitorController.monitor}"
+								value="#{monitor}" />
+				</p:commandLink>
+			</p:column>
+			
 		    </p:dataTable>
 		    </h:panelGrid>
 		    <p:commandButton value="#{msg['botao.orientarAlunos']}" action="#{alunoController.retornarAlunos}" ajax="false"/>

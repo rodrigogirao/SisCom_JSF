@@ -11,7 +11,7 @@ import br.ufc.es.siscom.dao.DisciplinaDAO;
 import br.ufc.es.siscom.model.Disciplina;
 
 @ManagedBean(name= "disciplinaController")
-@RequestScoped
+@SessionScoped
 
 public class DisciplinaController {
 
