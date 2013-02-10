@@ -1,7 +1,10 @@
 package br.ufc.es.siscom.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,7 +12,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import br.ufc.es.siscom.dao.DisciplinaDAO;
 import br.ufc.es.siscom.dao.MonitorDAO;
+import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
 
@@ -20,6 +25,8 @@ public class MonitorController {
 	private Monitor monitor = new Monitor();
 	private List<Horario> horarios;
 	private List<Horario> horariosSessao;
+	private ArrayList<String> nomeDisciplinasSelecionadas;
+	private Map<String, String> todasDisciplinas;
 	
 	
 	public String deletarMonitor(){
@@ -30,6 +37,13 @@ public class MonitorController {
 	public String verHorarios(){
 		setHorarios(MonitorDAO.retornaHorariosPorMatriculaDoMonitor(monitor.getMatricula()));
 		return "horariosMonitor.xhtml";
+	}
+	
+	public String adicionarDisciplinas(){
+		List<Disciplina> disciplinasMonitor = DisciplinaDAO.retornarListaDeDisciplinaPorListaDeNomes(nomeDisciplinasSelecionadas);
+		monitor.setDisciplinas(disciplinasMonitor);
+		MonitorDAO.atualizarMonitor(monitor);
+		return "orientadorInicial.xhtml";
 	}
 	
 	public Monitor getMonitor() {
@@ -55,6 +69,27 @@ public class MonitorController {
 
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
+	}
+	
+	public Map<String,String> getTodasDisciplinas() {
+		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
+		Map<String,String> dis = new HashMap<String, String>();
+		for (Disciplina disciplina : disciplinass) {
+			
+			dis.put(disciplina.getNome(),disciplina.getNome());
+			
+		}
+		this.todasDisciplinas = dis;
+		return todasDisciplinas;
+	}
+
+	public ArrayList<String> getNomeDisciplinasSelecionadas() {
+		return nomeDisciplinasSelecionadas;
+	}
+
+	public void setNomeDisciplinasSelecionadas(
+			ArrayList<String> nomeDisciplinasSelecionadas) {
+		this.nomeDisciplinasSelecionadas = nomeDisciplinasSelecionadas;
 	}
 
 }

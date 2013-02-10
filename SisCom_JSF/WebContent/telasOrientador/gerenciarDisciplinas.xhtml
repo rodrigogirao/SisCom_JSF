@@ -1,15 +1,32 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" 
-xmlns:f="http://java.sun.com/jsf/core" 
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
-xmlns:ui="http://java.sun.com/jsf/facelets"> 
-<head> 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
-<title>Template de Pagina JSF</title> 
-</head> 
-<body> 
-</body> 
-</html> 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/templateAdministrador.xhtml">
+	<ui:define name="conteudo">
+
+		<p:panel header="#{msg['gerenciarDisciplinas']}">
+			<h:panelGrid columns="3" cellpadding="10">
+				
+				<p:outputLabel value="#{msg['disciplina']}" />
+				<p:selectCheckboxMenu value="#{monitorController.nomeDisciplinasSelecionadas}" label="#{msg['aluno.escolherDisciplina']}" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:420px">  
+        				<f:selectItems value="#{monitorController.todasDisciplinas}" />  
+    			</p:selectCheckboxMenu>
+				<br/>
+
+				<p:commandButton value="#{msg['botao.cadastrar']}"
+					action="#{monitorController.adicionarDisciplinas}" ajax="false" />
+				<p:commandButton value="#{msg['botao.voltar']}"
+					action="orientadorInicial.xhtml" ajax="false" immediate="true" />
+
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+
+</h:html>

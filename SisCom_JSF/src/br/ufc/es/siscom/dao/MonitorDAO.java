@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
@@ -19,6 +18,16 @@ public class MonitorDAO {
 		Session session = CriarTabelas.preparaSessao();
 		session.save(monitor);
 		session.beginTransaction().commit();
+		session.close();
+	}
+	
+	public static void atualizarMonitor(Monitor novoMonitor){
+		Session session = CriarTabelas.preparaSessao();
+		Transaction transaction = session.beginTransaction();
+		Monitor monitorDB = (Monitor) session.load(Monitor.class, novoMonitor.getId());
+		monitorDB = novoMonitor;
+		session.update(monitorDB);
+		transaction.commit();
 		session.close();
 	}
 	
