@@ -51,6 +51,11 @@
 								<p:menuitem value="#{msg['disciplina.listar.disciplina']}"
 									ajax="false" immediate="true" action="listarDisciplinas.xhtml" />
 							</p:submenu>
+							
+							<p:submenu label="#{msg['logout']}">
+								<p:menuitem value="#{msg['logout']}"
+									ajax="false" immediate="true" action="#{loginController.logout}" />
+							</p:submenu>
 
 						</p:menubar>
 						<br/>

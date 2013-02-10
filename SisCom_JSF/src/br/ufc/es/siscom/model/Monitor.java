@@ -80,14 +80,6 @@ public class Monitor implements Serializable{
 		this.nome = nome;
 	}
 
-//	public List<Horario> getHorariosMonitor() {
-//		return horariosMonitor;
-//	}
-//
-//	public void setHorariosMonitor(List<Horario> horariosMonitor) {
-//		this.horariosMonitor = horariosMonitor;
-//	}
-
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}

@@ -31,9 +31,7 @@ public class Orientador implements Serializable  {
 	private Date dataNascimento;
 	
 	@OneToMany(mappedBy="orientador")
-	private List<Monitor> monitoresHorientados = new ArrayList<Monitor>();
-	
-
+	private List<Monitor> monitoresOrientados = new ArrayList<Monitor>();
 	
 
 public Orientador(){
@@ -87,12 +85,12 @@ public void setLogin(String login) {
 	this.login = login;
 }
 
-public List<Monitor> getMonitoresHorientados() {
-	return monitoresHorientados;
+public List<Monitor> getMonitoresOrientados() {
+	return monitoresOrientados;
 }
 
-public void setMonitoresHorientados(List<Monitor> monitoresHorientados) {
-	this.monitoresHorientados = monitoresHorientados;
+public void setMonitoresOrientados(List<Monitor> monitoresHorientados) {
+	this.monitoresOrientados = monitoresHorientados;
 }
 
 

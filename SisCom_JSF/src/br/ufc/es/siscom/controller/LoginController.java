@@ -60,7 +60,7 @@ public class LoginController {
 	public String logout(){
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.invalidate();
-		return "index.xhtml";
+		return "/index.xhtml";
 	}
 	
 	public String validarLogin(){

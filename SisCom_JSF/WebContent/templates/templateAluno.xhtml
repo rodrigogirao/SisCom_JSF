@@ -30,8 +30,10 @@
 									immediate="true" action="/index.xhtml" />
 							</p:submenu>
 
-							
-
+							<p:submenu label="#{msg['logout']}">
+								<p:menuitem value="#{msg['logout']}"
+									ajax="false" immediate="true" action="#{loginController.logout}" />
+							</p:submenu>
 						</p:menubar>
 						<br/>
 					</ui:insert>
