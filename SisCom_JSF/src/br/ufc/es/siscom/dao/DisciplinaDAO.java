@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import br.ufc.es.siscom.model.Disciplina;
 
@@ -31,6 +32,25 @@ public class DisciplinaDAO {
 
     }
 	
+	public static List<Disciplina> retornarListaDeDisciplinaPorListaDeNomes(List<String> nomes){
+		Session session = CriarTabelas.preparaSessao();
+		ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
+		for (String nomeDisciplina : nomes) {
+			Disciplina disciplina = DisciplinaDAO.retornarDisciplinaPorNome(nomeDisciplina);
+			disciplinas.add(disciplina);
+		}
+		session.close();
+		return disciplinas;
+		
+	}
+	
+	private static Disciplina retornarDisciplinaPorNome(String nomeDisciplina) {
+		Session session = CriarTabelas.preparaSessao();
+		Disciplina disciplina = (Disciplina) session.createCriteria(Disciplina.class).add(Restrictions.eq("nome", nomeDisciplina)).uniqueResult();
+		session.close();
+		return disciplina;
+	}
+
 	public static void atualizarDisciplina(Disciplina novaDisciplina){
 		Session session = CriarTabelas.preparaSessao();
 		Transaction transaction = session.beginTransaction();

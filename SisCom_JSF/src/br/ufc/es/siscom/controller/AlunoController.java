@@ -1,7 +1,9 @@
 package br.ufc.es.siscom.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,9 +18,10 @@ import br.ufc.es.siscom.model.Disciplina;
 @SessionScoped
 public class AlunoController {
 	private Aluno aluno = new Aluno();
-	private ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	private ArrayList<String> nomeDisciplinasSelecionadas;
 	private ArrayList<Aluno> alunos;
 	private ArrayList<Aluno> todosAlunos;
+	private Map<String, String> todasDisciplinas;
 	private Integer disciplina;
 	private String nomeAluno;
 	
@@ -45,6 +48,8 @@ public class AlunoController {
 	}
 	
 	public String salvar(){
+		List<Disciplina> disciplinasAluno = DisciplinaDAO.retornarListaDeDisciplinaPorListaDeNomes(nomeDisciplinasSelecionadas);
+		aluno.setDisciplinas(disciplinasAluno);
 		AlunoDAO.adicionarAluno(aluno);
 		aluno = new Aluno();
 		return "listarAlunos.xhtml";
@@ -56,17 +61,17 @@ public class AlunoController {
 		return "listarAlunos.xhtml";
 	}
 
-	public List<SelectItem> getAllDisciplinas() {
-		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
-		List<SelectItem> lista = new ArrayList<SelectItem>();
-		int i=0;
-		for (Disciplina disciplina : disciplinass) {
-			
-			lista.add(new SelectItem(new Integer(i),disciplina.getNome()));
-			i++;
-		}
-		return lista;
-	}
+//	public List<SelectItem> getAllDisciplinas() {
+//		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
+//		List<SelectItem> lista = new ArrayList<SelectItem>();
+//		int i=0;
+//		for (Disciplina disciplina : disciplinass) {
+//			
+//			lista.add(new SelectItem(new Integer(i),disciplina.getNome()));
+//			i++;
+//		}
+//		return lista;
+//	}
 		
 	public String retornarAlunos(){
 			this.alunos = AlunoDAO.retornarAlunos();
@@ -77,14 +82,6 @@ public class AlunoController {
 		ArrayList<Aluno> alunos = AlunoDAO.retornaAlunosPorNome(nomeAluno);
 		setAlunos(alunos);
 		return "orientarAlunos.xhtml";
-	}
-
-	public ArrayList<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
 	}
 
 	public ArrayList<Aluno> getAlunos() {
@@ -112,6 +109,34 @@ public class AlunoController {
 	public void setTodosAlunos(ArrayList<Aluno> todosAlunos) {
 		this.todosAlunos = todosAlunos;
 	}
+
+
+	public Map<String,String> getTodasDisciplinas() {
+		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
+		Map<String,String> dis = new HashMap<String, String>();
+		for (Disciplina disciplina : disciplinass) {
+			
+			dis.put(disciplina.getNome(),disciplina.getNome());
+			
+		}
+		this.todasDisciplinas = dis;
+		return todasDisciplinas;
+	}
+
+	public void setTodasDisciplinas(Map<String,String> todasDisciplinas) {
+		this.todasDisciplinas = todasDisciplinas;
+	}
+
+	public ArrayList<String> getNomeDisciplinasSelecionadas() {
+		return nomeDisciplinasSelecionadas;
+	}
+
+	public void setNomeDisciplinasSelecionadas(
+			ArrayList<String> nomeDisciplinasSelecionadas) {
+		this.nomeDisciplinasSelecionadas = nomeDisciplinasSelecionadas;
+	}
+
+
 	
 	
 }

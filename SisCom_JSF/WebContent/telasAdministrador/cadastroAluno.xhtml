@@ -53,6 +53,12 @@
 					<f:validateLength minimum="5" maximum="8" />
 				</p:password> 
 				<p:message for="nonFeedback" />
+				
+				<p:outputLabel value="#{msg['aluno.disciplina']}" />
+				<p:selectCheckboxMenu value="#{alunoController.nomeDisciplinasSelecionadas}" label="#{msg['aluno.escolherDisciplina']}" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:420px">  
+        				<f:selectItems value="#{alunoController.todasDisciplinas}" />  
+    			</p:selectCheckboxMenu>
+				<br/>
 
 				<p:commandButton value="#{msg['botao.cadastrar']}"
 					action="#{alunoController.salvar}" ajax="false" />
