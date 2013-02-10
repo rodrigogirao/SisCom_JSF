@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<ui:composition template="template.xhtml">
+<ui:composition template="/templates/templateAdministrador.xhtml">
 	<ui:define name="conteudo">
 
 		<p:panel header="#{msg['aluno.cadastrar.aluno']}">
@@ -57,21 +57,19 @@
 				<p:message for="nonFeedback" />
 
 
-				<p:outputLabel value="#{msg['aluno.disciplina']}" />
-				<p:selectManyMenu id="scroll"
-					value="#{alunoController.aluno.disciplinas}">
-					<f:selectItems value="#{alunoController.allDisciplinas}"
-						var="disciplina" itemLabel="#{disciplina.nome}"
-						itemValue="#{disciplina}" />
-				</p:selectManyMenu>
-				<br />
-
+<!-- 				<p:outputLabel value="#{msg['aluno.disciplina']}" /> -->
+<!-- 				<p:selectManyMenu id="scroll" -->
+<!-- 					value="#{alunoController.aluno.listaId}"> -->
+<!-- 					<f:selectItems value="#{alunoController.allDisciplinas}" -->
+<!-- 						var="disciplina" itemLabel="#{disciplina.nome}" -->
+<!-- 						itemValue="#{disciplina.id}" /> -->
+<!-- 				</p:selectManyMenu> -->
 
 
 				<p:commandButton value="#{msg['botao.cadastrar']}"
 					action="#{alunoController.salvar}" ajax="false" />
 				<p:commandButton value="#{msg['botao.voltar']}"
-					action="menuAdministrador.xhtml" ajax="false" immediate="true" />
+					action="opcoesAdministrador.xhtml" ajax="false" immediate="true" />
 
 			</h:panelGrid>
 		</p:panel>

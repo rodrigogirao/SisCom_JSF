@@ -7,71 +7,72 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<ui:composition template="template.xhtml">
+<ui:composition template="/templates/templateAdministrador.xhtml">
 	<ui:define name="conteudo">
-	<p:panel header="Listar Disciplinas">
+	<p:panel header="Listar Alunos">
 			<h:panelGrid columns="3" cellpadding="10">
 		<p:dataTable value="#{alunoController.alunos}" var="aluno">
 			<p:column>
 
 				<f:facet name="header">
-					<h:outputText value="Nome" />
+					<p:outputLabel value="Nome" />
 				</f:facet>
-				<h:commandLink action="atualizarAluno.xhtml" ajax="false">
-					<h:outputText value="#{aluno.nome}" />
+				<p:commandLink action="atualizarAluno.xhtml" ajax="false">
+					<p:outputLabel value="#{aluno.nome}" />
 					<f:setPropertyActionListener target="#{alunoController.aluno}"
 						value="#{aluno}" />
-				</h:commandLink>
+				</p:commandLink>
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="#{msg['aluno.data']}" />
+					<p:outputLabel value="#{msg['aluno.data']}" />
 				</f:facet>
-				<h:outputText value="#{aluno.dataNascimento}">
+				<p:outputLabel value="#{aluno.dataNascimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+				</p:outputLabel>
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Matricula" />
+					<p:outputLabel value="Matricula" />
 				</f:facet>
-				<h:outputText value="#{aluno.matricula}" />
+				<p:outputLabel value="#{aluno.matricula}" />
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Login" />
+					<p:outputLabel value="Login" />
 				</f:facet>
-				<h:outputText value="#{aluno.login}" />
+				<p:outputLabel value="#{aluno.login}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Disciplinas" />
-				</f:facet>
-				<p:dataList id="scroll" itemType="circle"
-					value="#{aluno.disciplinas}" var="disciplina">
-				#{disciplina.nome}
-			</p:dataList>
-			</p:column>
+<!-- 			<p:column> -->
+<!-- 				<f:facet name="header"> -->
+<!-- 					<p:outputLabel value="Disciplinas" /> -->
+<!-- 				</f:facet> -->
+<!-- 				<p:dataList id="scroll" itemType="circle" -->
+<!-- 					value="#{aluno.disciplinas}" var="disciplina"> -->
+<!-- 				#{disciplina.nome} -->
+<!-- 			</p:dataList> -->
+<!-- 			</p:column> -->
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="#{msg['deletar']}" />
+					<p:outputLabel value="#{msg['deletar']}" />
 				</f:facet>
-				<h:commandLink value="#{msg['deletar']}"
+				<p:commandLink value="#{msg['deletar']}"
 					action="#{alunoController.deletarAluno}" ajax="false">
 					<f:setPropertyActionListener target="#{alunoController.aluno}"
 						value="#{aluno}" />
-				</h:commandLink>
+				</p:commandLink>
 			</p:column>
 		</p:dataTable>
 		</h:panelGrid>
-		</p:panel>
-		<br/>
+			<br/>
 		<p:commandButton value="#{msg['link.voltar']}"
-			action="menuAdministrador.xhtml" ajax="false" />
+			action="opcoesAdministrador.xhtml" ajax="false" />
+		</p:panel>
+	
 	</ui:define>
 </ui:composition>
 </h:html>

@@ -1,31 +1,34 @@
 package br.ufc.es.siscom.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Disciplina {
+public class Disciplina implements Serializable{
 
 	@Id
 	@GeneratedValue
 	private long id;
 	@Column
 	private String nome;
+
+	@Column(unique=true)
+	private String codigo;
+	
+	public Disciplina(){
+		
+	}
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	@Column
-	private String codigo;
-	
-	public Disciplina(){
-		
 	}
 
 	public String getNome() {

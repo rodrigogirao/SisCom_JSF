@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	
-	<ui:composition template="template.xhtml">
+	<ui:composition template="/templates/templateAdministrador.xhtml">
 		<ui:define name="conteudo">
 		
 				<p:panel header="#{msg['orientador.cadastrar']}">
@@ -34,22 +34,22 @@
 							label="#{msg['orientador.siape']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
 						<p:message for="siape" />
 
-						<p:outputLabel value="#{msg['orientador.senha']}" />
-						<p:password id="senha"
-							value="#{orientadorController.orientador.senha}" required="true"
-							label="#{msg['orientador.senha']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
-						<p:message for="senha" />
-
 						<p:outputLabel value="#{msg['orientador.login']}" />
 						<p:inputText id="login"
 							value="#{orientadorController.orientador.login}" required="true"
 							label="#{msg['orientador.login']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
 						<p:message for="login" />
+						<p:outputLabel value="#{msg['orientador.senha']}" />
+						
+						<p:password id="senha"
+							value="#{orientadorController.orientador.senha}" required="true"
+							label="#{msg['orientador.senha']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
+						<p:message for="senha" />
 
 						<p:commandButton value="#{msg['botao.cadastrar']}"
 							action="#{orientadorController.cadastrarOrientador}" ajax="false" />
 						<p:commandButton value="#{msg['botao.voltar']}"
-							action="menuAdministrador.xhtml" ajax="false" immediate="true" />
+							action="opcoesAdministrador.xhtml" ajax="false" immediate="true" />
 
 					</h:panelGrid>
 				</p:panel>

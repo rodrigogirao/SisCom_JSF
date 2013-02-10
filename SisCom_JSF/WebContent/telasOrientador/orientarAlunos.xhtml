@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<ui:composition template="/templates/templateOrientador.xhtml">
+	<ui:define name="conteudo">
+		<p:panel header="#{msg['monitorarAluno']}">
+			<h:panelGrid columns="3" cellpadding="10">
+
+				<p:dataTable value="#{alunoController.alunos}" var="aluno">
+					<p:column>
+
+						<f:facet name="header">
+							<p:outputLabel value="#{msg['aluno.nome']}" />
+						</f:facet>
+						<p:outputLabel value="#{aluno.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="#{msg['aluno.matricula']}" />
+						</f:facet>
+						<p:outputLabel value="#{aluno.matricula}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="#{msg['monitorarAluno']}" />
+						</f:facet>
+						<p:commandLink value="#{msg['monitorarAluno']}"
+							action="#{orientadorController.monitorarAluno}" ajax="false">
+							<f:setPropertyActionListener
+								target="#{orientadorController.aluno}" value="#{aluno}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+
+</h:html>

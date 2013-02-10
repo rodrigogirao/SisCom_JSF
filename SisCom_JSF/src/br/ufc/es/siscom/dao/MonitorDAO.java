@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import br.ufc.es.siscom.model.Disciplina;
+import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
 import br.ufc.es.siscom.model.Orientador;
 
@@ -50,16 +51,16 @@ public class MonitorDAO {
 
 	}
 	
-//	public static void adicionarHorarioAoMonitor(long idMonitor,Horario horario){
-//		Session sessao = CriarTabelas.preparaSessao();
-//		sessao.beginTransaction();
-//
-//		Monitor monitor = new Monitor();
-//		sessao.load(monitor, idMonitor);
-//		monitor.getHorariosMonitor().add(horario);
-//		sessao.save(monitor);
-//		sessao.getTransaction().commit();
-//	}
+	public static void adicionarHorarioAoMonitor(long idMonitor,Horario horario){
+		Session sessao = CriarTabelas.preparaSessao();
+		sessao.beginTransaction();
+
+		Monitor monitor = new Monitor();
+		sessao.load(monitor, idMonitor);
+		monitor.getHorariosMonitor().add(horario);
+		sessao.save(monitor);
+		sessao.getTransaction().commit();
+	}
 	
 	public static List<Monitor> retornaMonitoresDoOrientador(Orientador orientador){
 		Session session = CriarTabelas.preparaSessao();
@@ -70,13 +71,16 @@ public class MonitorDAO {
 	}
 	
 	
-//	
-//	public static List<Horario> retornaHorariosPorMatriculaDoMonitor(String matricula){
-//		Monitor monitor = MonitorDAO.retornaMonitorPorMatricula(matricula);
-//		Session session = CriarTabelas.preparaSessao();
-//		return session.createCriteria(Horario.class).add(Restrictions.eq("monitor", monitor)).list();
-//				
-//	}
+	
+	public static List<Horario> retornaHorariosPorMatriculaDoMonitor(String matricula){
+		Monitor monitor = MonitorDAO.retornaMonitorPorMatricula(matricula);
+		Session session = CriarTabelas.preparaSessao();
+		List<Horario> horarios =  session.createCriteria(Horario.class).add(Restrictions.eq("monitor", monitor)).list();
+		session.close();
+		return horarios;
+		
+				
+	}
 	
 	public static Monitor retornaMonitorPorMatricula(String matricula){
 		Session session = CriarTabelas.preparaSessao();

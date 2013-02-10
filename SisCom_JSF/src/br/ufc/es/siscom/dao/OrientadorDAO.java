@@ -1,11 +1,9 @@
 package br.ufc.es.siscom.dao;
 
 import java.util.List;
-
-
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import br.ufc.es.siscom.model.Orientador;
 
@@ -24,6 +22,15 @@ public class OrientadorDAO {
 		List<Orientador> orientadores = session.createCriteria(Orientador.class).list();
 		session.close();
 		return orientadores;
+	}
+	
+	public static Orientador retornaOrientadorPorLogin(String login){
+		Session session = CriarTabelas.preparaSessao();
+		Orientador orientador =  (Orientador) session.createCriteria(Orientador.class).add(Restrictions.eq("login", login)).uniqueResult();
+		
+		session.close();
+		return orientador;
+	    
 	}
 	
 	public static void deletarOrientador(Orientador orientador)

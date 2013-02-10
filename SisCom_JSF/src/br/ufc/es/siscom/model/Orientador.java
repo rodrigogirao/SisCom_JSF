@@ -1,12 +1,15 @@
 package br.ufc.es.siscom.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 
@@ -22,10 +25,13 @@ public class Orientador implements Serializable  {
 	private String nome;
 	@Column
 	private String senha;
-	@Column
+	@Column(unique=true)
 	private String login;
 	@Column
 	private Date dataNascimento;
+	
+	@OneToMany(mappedBy="orientador")
+	private List<Monitor> monitoresHorientados = new ArrayList<Monitor>();
 	
 
 	
@@ -79,6 +85,14 @@ public String getLogin() {
 
 public void setLogin(String login) {
 	this.login = login;
+}
+
+public List<Monitor> getMonitoresHorientados() {
+	return monitoresHorientados;
+}
+
+public void setMonitoresHorientados(List<Monitor> monitoresHorientados) {
+	this.monitoresHorientados = monitoresHorientados;
 }
 
 

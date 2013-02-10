@@ -9,40 +9,40 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<ui:composition template="/templates/template.xhtml">
+<ui:composition template="/templates/templateOrientador.xhtml">
 	<ui:define name="conteudo">
-<p:panel header="Monitorar Aluno">
+<p:panel header="#{msg['orientador']}">
 			<h:panelGrid columns="3" cellpadding="10">
 	
-		<p:dataTable value="#{alunoController.alunos}" var="aluno">
+		<p:dataTable value="#{orientadorController.monitores}" var="monitor">
 			<p:column>
 
 				<f:facet name="header">
-					<h:outputText value="#{msg['aluno.nome']}" />
+					<p:outputLabel value="#{msg['aluno.nome']}" />
 				</f:facet>
-					<h:outputText value="#{aluno.nome}" />
+					<p:outputLabel value="#{monitor.nome}" />
 			</p:column>
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="#{msg['aluno.matricula']}" />
+					<p:outputLabel value="#{msg['aluno.matricula']}" />
 				</f:facet>
-				<h:outputText value="#{aluno.matricula}" />
+				<p:outputLabel value="#{monitor.matricula}" />
 			</p:column>
 			
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="#{msg['aluno.monitorar']}" />
-				</f:facet>
-				<h:commandLink value="#{msg['aluno.monitorar']}"
-					action="#{alunoController.monitorarAluno}" ajax="false">
-					<f:setPropertyActionListener target="#{alunoController.aluno}" value="#{aluno}" />
-				</h:commandLink>
-		    </p:column>
+<!-- 			<p:column> -->
+<!-- 				<f:facet name="header"> -->
+<!-- 					<h:outputText value="#{msg['aluno.monitorar']}" /> -->
+<!-- 				</f:facet> -->
+<!-- 				<p:commandLink value="#{msg['aluno.monitorar']}" -->
+<!-- 					action="#{monitorController.monitorarAluno}" ajax="false"> -->
+<!-- 					<f:setPropertyActionListener target="#{monitorController.monitor}" value="#{monitor}" /> -->
+<!-- 				</p:commandLink> -->
+<!-- 		    </p:column> -->
 		    </p:dataTable>
 		    </h:panelGrid>
+		    <p:commandButton value="Orientar Alunos" action="orientarAlunos.xhtml" ajax="false"/>
 		    </p:panel>
 		    </ui:define>
 		    </ui:composition>
-
 </h:html>

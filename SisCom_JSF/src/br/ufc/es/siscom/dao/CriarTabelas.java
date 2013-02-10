@@ -3,8 +3,6 @@ package br.ufc.es.siscom.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.monitor.Monitor;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.classic.Session;
@@ -13,6 +11,8 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import br.ufc.es.siscom.model.Administrador;
 import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Disciplina;
+import br.ufc.es.siscom.model.Horario;
+import br.ufc.es.siscom.model.Monitor;
 import br.ufc.es.siscom.model.Orientador;
 
 public class CriarTabelas {
@@ -52,7 +52,7 @@ private static AnnotationConfiguration adicionaClassesConfiguracao(
 		classes.add(Aluno.class);
 		classes.add(Orientador.class );
 		classes.add(Disciplina.class);
-//		classes.add(Horario.class);
+		classes.add(Horario.class);
 		classes.add(Monitor.class);
 		classes.add(Administrador.class);
 //		

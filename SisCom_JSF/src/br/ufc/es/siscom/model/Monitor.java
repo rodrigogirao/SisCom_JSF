@@ -1,5 +1,6 @@
 package br.ufc.es.siscom.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
-public class Monitor {
+public class Monitor implements Serializable{
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column
+	@Column(unique=true)
 	private String login;
 	@Column
 	private String senha;
@@ -29,8 +31,8 @@ public class Monitor {
 	@ManyToOne
 	private Orientador orientador;
 	
-//	@OneToMany(mappedBy="monitor")
-//	private List<Horario> horariosMonitor = new ArrayList<Horario>();
+	@OneToMany(mappedBy="monitor")
+	private List<Horario> horariosMonitor = new ArrayList<Horario>();
 	
 	@ManyToMany
 	@JoinTable(name = "Monitor_Disciplina", 
@@ -100,5 +102,13 @@ public class Monitor {
 
 	public void setOrientador(Orientador orientador) {
 		this.orientador = orientador;
+	}
+
+	public List<Horario> getHorariosMonitor() {
+		return horariosMonitor;
+	}
+
+	public void setHorariosMonitor(List<Horario> horariosMonitor) {
+		this.horariosMonitor = horariosMonitor;
 	}
 }
