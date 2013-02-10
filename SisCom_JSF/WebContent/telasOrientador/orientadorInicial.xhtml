@@ -41,7 +41,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 <!-- 		    </p:column> -->
 		    </p:dataTable>
 		    </h:panelGrid>
-		    <p:commandButton value="#{msg['botao.orientarAlunos']}" action="orientarAlunos.xhtml" ajax="false"/>
+		    <p:commandButton value="#{msg['botao.orientarAlunos']}" action="#{alunoController.retornarAlunos}" ajax="false"/>
 		    </p:panel>
 		    </ui:define>
 		    </ui:composition>

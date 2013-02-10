@@ -18,9 +18,19 @@ public class AlunoController {
 	private Aluno aluno = new Aluno();
 	private ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	private ArrayList<Aluno> alunos;
+	private ArrayList<Aluno> todosAlunos;
 	private Integer disciplina;
+	private String nomeAluno;
 	
 	
+	public String getNomeAluno() {
+		return nomeAluno;
+	}
+
+	public void setNomeAluno(String nomeAluno) {
+		this.nomeAluno = nomeAluno;
+	}
+
 	public Aluno getAluno() {
 		return aluno;
 	}
@@ -57,6 +67,17 @@ public class AlunoController {
 		}
 		return lista;
 	}
+		
+	public String retornarAlunos(){
+			this.alunos = AlunoDAO.retornarAlunos();
+		return "orientarAlunos.xhtml";
+	}
+	
+	public String buscarAlunos(){
+		ArrayList<Aluno> alunos = AlunoDAO.retornaAlunosPorNome(nomeAluno);
+		setAlunos(alunos);
+		return "orientarAlunos.xhtml";
+	}
 
 	public ArrayList<Disciplina> getDisciplinas() {
 		return disciplinas;
@@ -67,7 +88,7 @@ public class AlunoController {
 	}
 
 	public ArrayList<Aluno> getAlunos() {
-		this.alunos = AlunoDAO.retornarAlunos();
+		
 		return alunos;
 	}
 
@@ -81,6 +102,15 @@ public class AlunoController {
 
 	public void setDisciplina(Integer disciplina) {
 		this.disciplina = disciplina;
+	}
+
+	public ArrayList<Aluno> getTodosAlunos() {
+		this.todosAlunos = AlunoDAO.retornarAlunos();
+		return todosAlunos;
+	}
+
+	public void setTodosAlunos(ArrayList<Aluno> todosAlunos) {
+		this.todosAlunos = todosAlunos;
 	}
 	
 	

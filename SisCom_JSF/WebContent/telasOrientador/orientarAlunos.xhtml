@@ -11,8 +11,8 @@
 
 <ui:composition template="/templates/templateOrientador.xhtml">
 	<ui:define name="conteudo">
-		<p:panel header="#{msg['monitorarAluno']}">
-			<h:panelGrid columns="3" cellpadding="10">
+		<p:panel header="#{msg['orientarAluno']}">
+			<h:panelGrid columns="1" cellpadding="10">
 
 				<p:dataTable value="#{alunoController.alunos}" var="aluno">
 					<p:column>
@@ -32,16 +32,20 @@
 
 					<p:column>
 						<f:facet name="header">
-							<p:outputLabel value="#{msg['monitorarAluno']}" />
+							<p:outputLabel value="#{msg['orientarAluno']}" />
 						</f:facet>
-						<p:commandLink value="#{msg['monitorarAluno']}"
+						<p:commandLink value="#{msg['orientarAluno']}"
 							action="#{orientadorController.monitorarAluno}" ajax="false">
 							<f:setPropertyActionListener
 								target="#{orientadorController.aluno}" value="#{aluno}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>
+				
+				
+				
 			</h:panelGrid>
+			<p:commandButton value="#{msg['botao.buscarAlunos']}" action="buscarAlunos.xhtml" ajax="false"/>
 			<p:commandButton value="#{msg['botao.voltar']}" action="orientadorInicial.xhtml" ajax="false"/>
 		</p:panel>
 	</ui:define>

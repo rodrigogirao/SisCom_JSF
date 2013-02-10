@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<ui:composition template="/templates/templateOrientador.xhtml">
+	<ui:define name="conteudo">
+		<p:panel header="#{msg['buscarAlunos']}">
+			<h:panelGrid columns="3" cellpadding="10">
+
+				<p:outputLabel value="#{msg['aluno.nome']}" />
+				<p:inputText id="nome" value="#{alunoController.nomeAluno}"
+					required="true" label="#{msg['aluno.nome']}" requiredMessage="#{msg['campo.obrigatorio']}"/>
+				<p:message for="nome" />
+			</h:panelGrid>
+			<p:commandButton value="#{msg['botao.buscarAlunos']}" action="#{alunoController.buscarAlunos}" ajax="false"/>
+			<p:commandButton value="#{msg['botao.voltar']}" action="orientadorInicial.xhtml" ajax="false"/>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+
+</h:html>

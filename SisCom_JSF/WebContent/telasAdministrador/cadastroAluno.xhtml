@@ -46,8 +46,6 @@
 				</p:inputText>
 				<p:message for="login" />
 
-
-
 				<p:outputLabel value="#{msg['aluno.senha']}" />
 				<p:password id="nonFeedback" value="#{alunoController.aluno.senha}"
 					label="#{msg['aluno.senha']}" required="true"
@@ -55,16 +53,6 @@
 					<f:validateLength minimum="5" maximum="8" />
 				</p:password> 
 				<p:message for="nonFeedback" />
-
-
-<!-- 				<p:outputLabel value="#{msg['aluno.disciplina']}" /> -->
-<!-- 				<p:selectManyMenu id="scroll" -->
-<!-- 					value="#{alunoController.aluno.listaId}"> -->
-<!-- 					<f:selectItems value="#{alunoController.allDisciplinas}" -->
-<!-- 						var="disciplina" itemLabel="#{disciplina.nome}" -->
-<!-- 						itemValue="#{disciplina.id}" /> -->
-<!-- 				</p:selectManyMenu> -->
-
 
 				<p:commandButton value="#{msg['botao.cadastrar']}"
 					action="#{alunoController.salvar}" ajax="false" />
