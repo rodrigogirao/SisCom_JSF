@@ -1,26 +1,33 @@
 package br.ufc.es.siscom.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.classic.Session;
 import org.hibernate.Transaction;
 
 import br.ufc.es.siscom.model.Aluno;
+import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
+import br.ufc.es.siscom.util.CriarTabelas;
+import br.ufc.es.siscom.util.PreparaSessao;
 
 
 
 public class HorarioDAO {
+	
+	private static Session session;
 
 	public static void adicionarHorario(Horario horario){
 
-		Session session = CriarTabelas.preparaSessao();
+		session = (Session) PreparaSessao.pegarSessao();
 		session.save(horario);
 		session.beginTransaction().commit();
 		session.close();
 		}
 	public static Horario buscarHorarioPorCodigo(String codigo) {
-		Session session = CriarTabelas.preparaSessao();
+		session = (Session) PreparaSessao.pegarSessao();
 		String hql = "from Horario horario where horario.codigoHorario like ?";
 		
 		Query query = (Query) session.createQuery(hql).setString(0, codigo);
@@ -28,36 +35,31 @@ public class HorarioDAO {
 	}
 	
 	public static void adicionarMonitorAoHorario(long idHorario, Monitor monitor){
-		Session sessao = CriarTabelas.preparaSessao();
-		sessao.beginTransaction();
+		session = (Session) PreparaSessao.pegarSessao();
+		session.beginTransaction();
 
 		Horario horario = new Horario();
-		sessao.load(horario, idHorario);
+		session.load(horario, idHorario);
 		horario.setMonitor(monitor);
-		sessao.save(horario);
-		sessao.getTransaction().commit();
+		session.save(horario);
+		session.getTransaction().commit();
+		session.close();
 	}
 	
 	public static void deletarHorario(Horario horario){
-		Session session = CriarTabelas.preparaSessao();
+		session = (Session) PreparaSessao.pegarSessao();
 		Transaction transaction = session.beginTransaction();
 		Horario horarioDB = (Horario) session.load(Horario.class, horario.getId());
 		session.delete(horarioDB);
 		transaction.commit();
 		session.close();
 	}
-	
-//	public static void associarAlunoAoHorario(long id, Aluno aluno) {
-//		Session sessao = CriarTabelas.preparaSessao();
-//		sessao.beginTransaction();
-//
-//		Horario horario = new Horario();
-//		sessao.load(horario, id);
-//		
-//		horario.getAlunos().add(aluno);
-//		sessao.save(horario);
-//		sessao.getTransaction().commit();
-//		
-//		
-//	}
+	public static List<Horario> retornarTodosOsHorarios() {
+		session = (Session) PreparaSessao.pegarSessao();
+		List<Horario> horarios = session.createCriteria(Horario.class).list();
+		session.close();
+		return horarios;
+		
+	}
+
 }

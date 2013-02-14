@@ -41,7 +41,7 @@
 				<p:selectOneMenu id="disciplina" value="#{horarioController.disciplinaSelecionada}" label="#{msg['aluno.escolherDisciplina']}"
 					required="true" requiredMessage="#{msg['campo.obrigatorio']}" >
 					<f:selectItem itemLabel="#{msg['seleciona']}" itemValue="" />
-					<f:selectItems value="#{monitorController.todasDisciplinas}" />		
+					<f:selectItems value="#{monitorController.disciplinasMonitor}" />		
 				</p:selectOneMenu>
 				
 				<p:message for="disciplina" />

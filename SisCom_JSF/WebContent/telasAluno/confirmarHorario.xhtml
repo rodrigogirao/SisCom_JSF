@@ -13,7 +13,7 @@
 	<ui:define name="conteudo">
 		<p:panel header="#{msg['aluno']}">
 			<h:panelGrid columns="3" cellpadding="10">
-				<p:dataTable value="#{alunoController.horariosSessao}" var="horario">
+				<p:dataTable value="#{alunoController.horariosParaConfirmar}" var="horario">
 					<p:column>
 
 						<f:facet name="header">
@@ -47,11 +47,18 @@
 					
 					<p:column>
 						<f:facet name="header">
-							<p:outputLabel value="#{msg['deletar']}" />
+							<h:outputText value="#{msg['monitor']}" />
 						</f:facet>
-						<p:commandLink value="#{msg['deletar']}"
-							action="#{horarioController.deletarHorario}" ajax="false">
-							<f:setPropertyActionListener target="#{horarioController.horario}"
+						<h:outputText value="#{horario.monitor.nome}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="#{msg['confirmar']}" />
+						</f:facet>
+						<p:commandLink value="#{msg['confirmar']}"
+							action="#{alunoController.confirmarHorario}" ajax="false">
+							<f:setPropertyActionListener target="#{alunoController.horario}"
 								value="#{horario}" />
 						</p:commandLink>
 					</p:column>
@@ -59,7 +66,7 @@
 
 				</p:dataTable>
 			</h:panelGrid>
-			<p:commandButton value="#{msg['botao.confirmarHorario']}" action="confirmarHorario.xhtml" ajax="false" />
+			<p:commandButton value="#{msg['botao.voltar']}" action="alunoInicial.xhtml" ajax="false" />
 		</p:panel>
 	</ui:define>
 </ui:composition>

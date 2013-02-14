@@ -15,7 +15,7 @@
 				
 				<p:outputLabel value="#{msg['disciplina']}" />
 				<p:selectCheckboxMenu value="#{monitorController.nomeDisciplinasSelecionadas}" label="#{msg['aluno.escolherDisciplina']}" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:420px">  
-        				<f:selectItems value="#{monitorController.todasDisciplinas}" />  
+        				<f:selectItems value="#{alunoController.todasDisciplinas}" />  
     			</p:selectCheckboxMenu>
 				<br/>
 

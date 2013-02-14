@@ -1,5 +1,7 @@
 package br.ufc.es.siscom.controller;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -18,6 +20,8 @@ public class HorarioController {
 	
 	private Horario horario = new Horario();
 	private String disciplinaSelecionada;
+	private List<Horario> todosHorarios;
+	
 	
 	public String salvar(){
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
@@ -51,6 +55,15 @@ public class HorarioController {
 
 	public void setDisciplinaSelecionada(String disciplinaSelecionada) {
 		this.disciplinaSelecionada = disciplinaSelecionada;
+	}
+
+	public List<Horario> getTodosHorarios() {
+		this.setTodosHorarios(HorarioDAO.retornarTodosOsHorarios());
+		return todosHorarios;
+	}
+
+	public void setTodosHorarios(List<Horario> todosHorarios) {
+		this.todosHorarios = todosHorarios;
 	}
 
 }

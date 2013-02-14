@@ -7,11 +7,16 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.ufc.es.siscom.dao.AlunoDAO;
 import br.ufc.es.siscom.dao.DisciplinaDAO;
+import br.ufc.es.siscom.dao.HorarioDAO;
 import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Disciplina;
+import br.ufc.es.siscom.model.Horario;
 
 @ManagedBean(name = "alunoController")
 @SessionScoped
@@ -23,6 +28,18 @@ public class AlunoController {
 	private Map<String, String> todasDisciplinas;
 	private Integer disciplina;
 	private String nomeAluno;
+	private List<Horario> horarios;
+	private Horario horario;
+	private List<Horario> horariosSessao;
+	private List<Horario> horariosParaConfirmar;
+	
+	public List<Horario> getHorariosSessao() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		LoginController loginController =  (LoginController) session.getAttribute("loginController");
+		horariosSessao = AlunoDAO.retornaHorariosDoAluno(loginController.getAluno());
+		return horariosSessao;
+	}
 	
 	
 	public String getNomeAluno() {
@@ -60,6 +77,14 @@ public class AlunoController {
 		AlunoDAO.atualizarAluno(aluno);
 		aluno = new Aluno();
 		return "listarAlunos.xhtml";
+	}
+	
+	public String confirmarHorario(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		LoginController loginController =  (LoginController) session.getAttribute("loginController");
+		AlunoDAO.associarAlunoAoHorario(loginController.getAluno().getId(), horario);
+		return "alunoInicial.xhtml";
 	}
 		
 	public String retornarAlunos(){
@@ -123,6 +148,50 @@ public class AlunoController {
 	public void setNomeDisciplinasSelecionadas(
 			ArrayList<String> nomeDisciplinasSelecionadas) {
 		this.nomeDisciplinasSelecionadas = nomeDisciplinasSelecionadas;
+	}
+
+
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+
+
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
+
+
+	public Horario getHorario() {
+		return horario;
+	}
+
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
+
+
+	public List<Horario> getHorariosParaConfirmar() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		LoginController loginController =  (LoginController) session.getAttribute("loginController");
+		List<Disciplina> disciplinasAluno = loginController.getAluno().getDisciplinas();
+		List<Horario> todosHorarios = HorarioDAO.retornarTodosOsHorarios();
+		List<Horario> horariosConfirmar = new ArrayList<Horario>();
+		for (Disciplina disciplina : disciplinasAluno) {	
+			for (Horario horario : todosHorarios) {
+				if(horario.getDisciplina()==disciplina){
+					horariosConfirmar.add(horario);
+				}
+			}
+		}
+		setHorariosParaConfirmar(horariosConfirmar);
+		return horariosParaConfirmar;
+	}
+
+
+	public void setHorariosParaConfirmar(List<Horario> horariosParaConfirmar) {
+		this.horariosParaConfirmar = horariosParaConfirmar;
 	}
 
 

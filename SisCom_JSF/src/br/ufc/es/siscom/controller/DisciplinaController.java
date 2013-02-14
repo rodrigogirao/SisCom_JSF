@@ -17,6 +17,7 @@ public class DisciplinaController {
 
 private Disciplina disciplina = new Disciplina();
 private List<Disciplina> disciplinas =  new ArrayList<Disciplina>();
+private List<Disciplina> disciplinasComHorario;
 
 	public List<Disciplina> getDisciplinas() {
 	disciplinas = DisciplinaDAO.retornarDisciplinas(); 
@@ -29,9 +30,7 @@ private List<Disciplina> disciplinas =  new ArrayList<Disciplina>();
 		DisciplinaDAO.adicionarDisciplina(disciplina);
 		return "listarDisciplinas.xhtml";
 	}
-	public static ArrayList<Disciplina> retornarTodasAsDisciplinas(){
-		return (ArrayList<Disciplina>) DisciplinaDAO.retornarDisciplinas();
-	}
+
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
@@ -47,4 +46,8 @@ private List<Disciplina> disciplinas =  new ArrayList<Disciplina>();
 		DisciplinaDAO.deletarDisciplina(disciplina);
 		return "listarDisciplinas.xhtml";
 }
+	
+	public void setDisciplinasComHorario(List<Disciplina> disciplinasComHorario) {
+		this.disciplinasComHorario = disciplinasComHorario;
+	}
 }

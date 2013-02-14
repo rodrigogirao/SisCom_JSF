@@ -35,6 +35,11 @@ public class Aluno implements Serializable{
 	@Column
 	private Date dataNascimento;
 	
+	@ManyToMany
+	@JoinTable(name = "Horario_Aluno", 
+			joinColumns = { @JoinColumn(name = "idHorario") }, 
+			inverseJoinColumns = { @JoinColumn(name = "idAluno") })
+	private List<Horario> horarios = new ArrayList<Horario>();
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Aluno_Disciplina", 
@@ -100,5 +105,14 @@ public class Aluno implements Serializable{
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
+
 
 }

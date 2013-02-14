@@ -1,4 +1,4 @@
-package br.ufc.es.siscom.dao;
+package br.ufc.es.siscom.util;
 
 import java.util.ArrayList;
 import java.util.List;

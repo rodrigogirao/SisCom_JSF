@@ -23,6 +23,7 @@ public class LoginController {
 	private String senha;
 	private Orientador orientador;
 	private Monitor monitor;
+	private Aluno aluno;
 	
 	public Orientador getOrientador() {
 		return orientador;
@@ -72,7 +73,7 @@ public class LoginController {
 		}
 		
 		if(tipoLogin.equals("aluno")){
-			Aluno aluno = AlunoDAO.retornaAlunoPorLogin(login);
+			this.aluno = AlunoDAO.retornaAlunoPorLogin(login);
 			if(aluno!=null && aluno.getSenha().equals(senha)){
 				return "/telasAluno/alunoInicial.xhtml";
 			}
@@ -92,6 +93,12 @@ public class LoginController {
 			}
 		}
 		return "index.xhtml";
+	}
+	public Aluno getAluno() {
+		return aluno;
+	}
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 
 }

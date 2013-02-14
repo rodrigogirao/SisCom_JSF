@@ -26,7 +26,7 @@ public class MonitorController {
 	private List<Horario> horarios;
 	private List<Horario> horariosSessao;
 	private ArrayList<String> nomeDisciplinasSelecionadas;
-	private Map<String, String> todasDisciplinas;
+	private Map<String, String> disciplinasMonitor;
 	
 	
 	
@@ -72,16 +72,20 @@ public class MonitorController {
 		this.horarios = horarios;
 	}
 	
-	public Map<String,String> getTodasDisciplinas() {
-		List<Disciplina> disciplinass = DisciplinaDAO.retornarDisciplinas();
+	public Map<String,String> getDisciplinasMonitor() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		LoginController loginController =  (LoginController) session.getAttribute("loginController");
+		
+		List<Disciplina> disciplinass = loginController.getMonitor().getDisciplinas();
 		Map<String,String> dis = new HashMap<String, String>();
 		for (Disciplina disciplina : disciplinass) {
 			
 			dis.put(disciplina.getNome(),disciplina.getNome());
 			
 		}
-		this.todasDisciplinas = dis;
-		return todasDisciplinas;
+		this.disciplinasMonitor = dis;
+		return disciplinasMonitor;
 	}
 
 	public ArrayList<String> getNomeDisciplinasSelecionadas() {

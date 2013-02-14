@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,11 +22,6 @@ public class Horario implements Serializable{
 	@Id
 	@GeneratedValue
 	private long id;
-	@ManyToMany
-	@JoinTable(name = "Horario_Aluno", 
-			joinColumns = { @JoinColumn(name = "idAluno") }, 
-			inverseJoinColumns = { @JoinColumn(name = "idHorario") })
-	private List<Aluno> alunos = new ArrayList<Aluno>();
 	@Column
 	private String horaInicio;
 	@Column
@@ -77,15 +73,7 @@ public class Horario implements Serializable{
 	public void setData(Date data) {
 		this.data = data;
 	}
-
-	public List<Aluno> getAlunos() {
-		return alunos;
-	}
-
-
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
-	}
+	
 	public long getId() {
 		return id;
 	}

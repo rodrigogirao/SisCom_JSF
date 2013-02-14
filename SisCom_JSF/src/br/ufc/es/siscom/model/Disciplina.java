@@ -1,11 +1,14 @@
 package br.ufc.es.siscom.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -18,6 +21,9 @@ public class Disciplina implements Serializable{
 
 	@Column(unique=true)
 	private String codigo;
+	
+	@OneToMany(mappedBy="disciplina")
+	private List<Horario> horariosDisciplina = new ArrayList<Horario>();
 	
 	public Disciplina(){
 		
@@ -45,5 +51,13 @@ public class Disciplina implements Serializable{
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public List<Horario> getHorariosDisciplina() {
+		return horariosDisciplina;
+	}
+
+	public void setHorariosDisciplina(List<Horario> horariosDisciplina) {
+		this.horariosDisciplina = horariosDisciplina;
 	}
 }
