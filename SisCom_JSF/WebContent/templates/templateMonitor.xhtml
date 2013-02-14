@@ -27,7 +27,12 @@
 						<p:menubar>
 							<p:submenu label="#{msg['inicio']}">
 								<p:menuitem value="#{msg['inicio']}" ajax="false"
-									immediate="true" action="/index.xhtml" />
+									immediate="true" action="/telasMonitor/monitorInicial.xhtml" />
+							</p:submenu>
+							
+							<p:submenu label="#{msg['botao.cadastrarHorario']}">
+								<p:menuitem value="#{msg['botao.cadastrarHorario']}" ajax="false"
+									immediate="true" action="/telasMonitor/cadastrarHorario.xhtml" />
 							</p:submenu>
 							
 							<p:submenu label="#{msg['logout']}">

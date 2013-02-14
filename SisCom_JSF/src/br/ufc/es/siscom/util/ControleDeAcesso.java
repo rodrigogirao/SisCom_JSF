@@ -27,6 +27,7 @@ public class ControleDeAcesso implements PhaseListener{
         
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		
 		if(verificarPaginaAdmin(currentPage)){
 			
 			Administrador admin = (Administrador) session.getAttribute("admin");
@@ -56,7 +57,7 @@ public class ControleDeAcesso implements PhaseListener{
 		
 		if(verificarPaginaMonitor(currentPage)){
 			 
-			Monitor monitor = (Monitor) session.getAttribute("orientador");
+			Monitor monitor = (Monitor) session.getAttribute("monitor");
 			
 			if( monitor == null){
 				this.redirecionarParaLogin(fc);

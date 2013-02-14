@@ -27,7 +27,12 @@
 						<p:menubar>
 							<p:submenu label="#{msg['inicio']}">
 								<p:menuitem value="#{msg['inicio']}" ajax="false"
-									immediate="true" action="/index.xhtml" />
+									immediate="true" action="/telasAluno/alunoInicial.xhtml" />
+							</p:submenu>
+							
+							<p:submenu label="#{msg['botao.confirmarHorario']}">
+								<p:menuitem value="#{msg['botao.confirmarHorario']}" ajax="false"
+									immediate="true" action="/telasAluno/confirmarHorario.xhtml" />
 							</p:submenu>
 
 							<p:submenu label="#{msg['logout']}">
