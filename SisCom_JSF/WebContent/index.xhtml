@@ -9,6 +9,7 @@
 
 <ui:composition template="/templates/templateIndex.xhtml">
 	<ui:define name="conteudo">
+	<p:messages />
 
 		<p:panel header="#{msg['login']}">
 			<h:panelGrid columns="3" cellpadding="10">
@@ -27,7 +28,7 @@
 
 				<p:outputLabel value="#{msg['conta']}" />
 
-				<p:selectOneMenu value="#{loginController.tipoLogin}">
+				<p:selectOneMenu id="opcao" value="#{loginController.tipoLogin}" required="true" requiredMessage="#{msg['campo.obrigatorio']}" >
 					<f:selectItem itemLabel="#{msg['seleciona']}" itemValue="" />
 					<f:selectItem itemLabel="#{msg['aluno']}" itemValue="aluno" />
 					<f:selectItem itemLabel="#{msg['orientador']}"
@@ -36,6 +37,7 @@
 					<f:selectItem itemLabel="#{msg['administradoor']}"
 						itemValue="administrador" />
 				</p:selectOneMenu>
+				<p:message for="opcao" />
 
 
 			</h:panelGrid>

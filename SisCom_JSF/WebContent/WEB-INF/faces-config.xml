@@ -16,5 +16,9 @@
 		<supported-locale>pt_BR</supported-locale>
 		<supported-locale>es_US</supported-locale>
 	</locale-config>
+	
 </application>
+<lifecycle>
+		<phase-listener>br.ufc.es.siscom.util.ControleDeAcesso</phase-listener>
+</lifecycle>
 </faces-config>
