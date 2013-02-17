@@ -36,9 +36,9 @@
 				<f:facet name="header">
 					<p:outputLabel value="#{msg['aluno.data']}" />
 				</f:facet>
-				<p:outputLabel value="#{orientador.dataNascimento}" >
+				<h:outputText value="#{orientador.dataNascimento}" >
 				<f:convertDateTime pattern="dd/MM/yyyy"/>
-				</p:outputLabel>
+				</h:outputText>
 			</p:column>
 
 			<p:column>

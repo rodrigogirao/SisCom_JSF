@@ -41,9 +41,7 @@
 				<p:outputLabel value="#{msg['aluno.login']}" />
 				<p:inputText id="login" value="#{alunoController.aluno.login}"
 					required="true" label="#{msg['aluno.login']}"
-					validatorMessage="#{msg['campo.validar.login']}" requiredMessage="#{msg['campo.obrigatorio']}">
-					<f:validateLength maximum="6" />
-				</p:inputText>
+					requiredMessage="#{msg['campo.obrigatorio']}"/>
 				<p:message for="login" />
 
 				<p:outputLabel value="#{msg['aluno.senha']}" />

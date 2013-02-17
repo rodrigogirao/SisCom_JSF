@@ -85,19 +85,5 @@ public class DisciplinaDAO {
 		transaction.commit();
 		session.close();
 	
-//	public static void associarDisciplinaHorario(long idHorario, Disciplina disciplina){
-//
-//		Session sessao = CriarTabelas.preparaSessao();
-//		sessao.beginTransaction();
-//
-//		Horario horario = new Horario();
-//		sessao.load(horario, idHorario);
-//		horario.setDisciplina(disciplina);
-//
-//		sessao.save(horario);
-//		sessao.getTransaction().commit();
-
-	//}
-	
        }
 	}

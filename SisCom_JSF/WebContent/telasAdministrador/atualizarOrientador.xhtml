@@ -9,33 +9,32 @@
 
 <ui:composition template="/templates/templateAdministrador.xhtml">
 <ui:define name="conteudo">
-	
 		<h:inputHidden value="#{orientadorController.orientador.id}" />
 		<p:panel header="Atualizar Orientador">
 		<h:panelGrid columns="3" cellpadding="10">
 
 			<p:outputLabel value="#{msg['orientador.nome']}" />
-			<p:inputText value="#{orientadorController.orientador.nome}" required="true" requiredMessage="Campo obrigatório"/>
-			<p:message/>
+			<p:inputText id="nome" value="#{orientadorController.orientador.nome}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message for="nome" />
 			
 			<p:outputLabel value="#{msg['aluno.data']}" />
 			<p:inputText id ="data" value="#{orientadorController.orientador.dataNascimento}" converterMessage="#{msg['campo.data.invalida']}"
 			required="true" requiredMessage="#{msg['campo.obrigatorio']}">
 			<f:convertDateTime pattern="dd/MM/yyyy"/>
 			</p:inputText>
-			<p:message/>
+			<p:message for="data" />
 			
 			<p:outputLabel value="#{msg['orientador.siape']}" />
-			<p:inputText value="#{orientadorController.orientador.siape}" required="true" requiredMessage="Campo obrigatório"/>
-			<p:message/>
-			
-			<p:outputLabel value="#{msg['orientador.senha']}" />
-			<p:inputText value="#{orientadorController.orientador.senha}" required="true" requiredMessage="Campo obrigatório"/>
-			<p:message/>
+			<p:inputText id="siape" value="#{orientadorController.orientador.siape}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message for="siape" />
 			
 			<p:outputLabel value="#{msg['orientador.login']}" />
-			<p:inputText value="#{orientadorController.orientador.login}" required="true" requiredMessage="Campo obrigatório"/>
-			<p:message/>
+			<p:inputText id="login" value="#{orientadorController.orientador.login}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message for="login" />
+			
+			<p:outputLabel value="#{msg['orientador.senha']}" />
+			<p:password id="senha" value="#{orientadorController.orientador.senha}" required="true" requiredMessage="Campo obrigatório"/>
+			<p:message for="senha" />
 
 			<p:commandButton type="submit" value="#{msg['botao.atualizar']}" ajax="false"
 				action="#{orientadorController.atualizarOrientador}" />

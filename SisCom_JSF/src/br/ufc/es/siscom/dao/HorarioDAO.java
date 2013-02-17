@@ -34,6 +34,7 @@ public class HorarioDAO {
 		return (Horario) query.uniqueResult();
 	}
 	
+	//Método duplicado na classe MonitorDAO ver qual é o verdadeiro
 	public static void adicionarMonitorAoHorario(long idHorario, Monitor monitor){
 		session = (Session) PreparaSessao.pegarSessao();
 		session.beginTransaction();

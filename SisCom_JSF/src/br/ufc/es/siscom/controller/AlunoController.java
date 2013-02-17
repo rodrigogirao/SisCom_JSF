@@ -174,8 +174,8 @@ public class AlunoController {
 	public List<Horario> getHorariosParaConfirmar() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
-		LoginController loginController =  (LoginController) session.getAttribute("loginController");
-		List<Disciplina> disciplinasAluno = loginController.getAluno().getDisciplinas();
+		Aluno aluno =  (Aluno) session.getAttribute("aluno");
+		List<Disciplina> disciplinasAluno = aluno.getDisciplinas();
 		List<Horario> todosHorarios = HorarioDAO.retornarTodosOsHorarios();
 		List<Horario> horariosConfirmar = new ArrayList<Horario>();
 		for (Disciplina disciplina : disciplinasAluno) {	
