@@ -2,6 +2,7 @@ package br.ufc.es.siscom.util;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.ufc.es.siscom.controller.AlunoController;
 import br.ufc.es.siscom.controller.DisciplinaController;
@@ -21,12 +22,12 @@ import br.ufc.es.siscom.model.Orientador;
 public class Povoa {
 	public static void main(String[] args) {
 
-		CriarTabelas.reiniciaEsquemaBD();
-
-		Administrador admin = new Administrador();
-		admin.setLogin("admin");
-		admin.setSenha("admin");
-		AdministradorDAO.adicionarAdministrador(admin);
+//		CriarTabelas.reiniciaEsquemaBD();
+//
+//		Administrador admin = new Administrador();
+//		admin.setLogin("admin");
+//		admin.setSenha("admin");
+//		AdministradorDAO.adicionarAdministrador(admin);
 
 //		Disciplina disciplina = new Disciplina();
 //		disciplina.setCodigo("QX020");
@@ -43,6 +44,22 @@ public class Povoa {
 //		aluno.setMatricula("0308845");
 //		aluno.setLogin("rodrig");
 //		aluno.setSenha("12345");
+		
+//		Orientador orientador = OrientadorDAO.retornaOrientadorPorLogin("fabio");
+//		
+//		List<Aluno> alunos = AlunoDAO.retornarTodosAlunosNaoMonitores(orientador);
+//		
+//		for (Aluno aluno2 : alunos) {
+//			System.out.println(aluno2.getLogin());
+//		}
+		
+		Orientador orientador = OrientadorDAO.retornaOrientadorPorLogin("fabio");
+		
+		List<Monitor> monitores = MonitorDAO.retornaMonitoresDoOrientador(orientador);
+		
+		for (Monitor aluno2 : monitores) {
+			System.out.println(aluno2.getLogin());
+		}
 //
 //		AlunoController ac = new AlunoController();
 //		ArrayList<String> nomeDisciplinasSelecionadas = new ArrayList<String>();

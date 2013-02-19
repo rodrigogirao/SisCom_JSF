@@ -1,8 +1,10 @@
 package br.ufc.es.siscom.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.hibernate.Transaction;
@@ -11,11 +13,13 @@ import org.hibernate.criterion.Restrictions;
 import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Horario;
 import br.ufc.es.siscom.model.Monitor;
+import br.ufc.es.siscom.model.Orientador;
 import br.ufc.es.siscom.util.PreparaSessao;
 
 public class AlunoDAO{
 	
 	private static Session session;
+	
 
 	public static void adicionarAluno(Aluno aluno){
 
@@ -32,6 +36,42 @@ public class AlunoDAO{
 		return alunos;
 
     }
+	
+	public static ArrayList<Aluno> retornarTodosAlunosNaoMonitores(Orientador orientador){
+		
+		session = PreparaSessao.pegarSessao();
+		
+		List<Monitor> monitores = MonitorDAO.retornaMonitoresDoOrientador(orientador);
+		List<Aluno> alunosMonitores = new ArrayList<Aluno>();
+		List<Aluno> alunos = retornarAlunos();
+		List<Aluno> alunosNaoMonitores = new ArrayList<Aluno>();
+		
+		HashMap<String, Aluno> todosAlunos = new HashMap<String, Aluno>();
+		
+		for (Aluno aluno : alunos) {
+			todosAlunos.put(aluno.getLogin(), aluno);
+		}
+		
+		for (Monitor monitor : monitores) {
+			Aluno aluno = AlunoDAO.retornaAlunoPorLogin(monitor.getLogin());
+			alunosMonitores.add(aluno);
+		}
+		
+		for (Aluno aluno : alunosMonitores) {
+			todosAlunos.remove(aluno.getLogin());
+		}
+		
+		for (Aluno aluno : todosAlunos.values()) {
+			alunosNaoMonitores.add(aluno);
+		}
+		
+		
+		
+		//session.close();
+		
+		return (ArrayList<Aluno>) alunosNaoMonitores;
+		
+	}
 	
 	public static Aluno retornaAlunoPorLogin(String login){
 		session = (Session) PreparaSessao.pegarSessao();

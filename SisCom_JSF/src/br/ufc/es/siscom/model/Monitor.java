@@ -15,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.ufc.es.siscom.controller.MonitorController;
+import br.ufc.es.siscom.dao.MonitorDAO;
+
 @Entity
 public class Monitor implements Serializable{
 	@Id
@@ -35,7 +38,7 @@ public class Monitor implements Serializable{
 	@OneToMany(mappedBy="monitor")
 	private List<Horario> horariosMonitor = new ArrayList<Horario>();
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "Monitor_Disciplina", 
 			joinColumns = { @JoinColumn(name = "id_monitor") }, 
 			inverseJoinColumns = { @JoinColumn(name = "id_codigo") })
@@ -82,6 +85,7 @@ public class Monitor implements Serializable{
 	}
 
 	public List<Disciplina> getDisciplinas() {
+		//setDisciplinas(MonitorDAO.retornaDisciplinasDoMonitor(this));
 		return disciplinas;
 	}
 

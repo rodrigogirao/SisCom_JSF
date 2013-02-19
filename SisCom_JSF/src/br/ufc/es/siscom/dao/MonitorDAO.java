@@ -91,7 +91,7 @@ public class MonitorDAO {
 		session = (Session) PreparaSessao.pegarSessao();
 		List<Monitor> monitores =  session.createCriteria(Monitor.class).add(Restrictions.eq("orientador", orientador)).list();
 		
-		session.close();
+		//session.close();
 		return monitores;
 	}
 	
@@ -102,6 +102,16 @@ public class MonitorDAO {
 		List<Horario> horarios =  session.createCriteria(Horario.class).add(Restrictions.eq("monitor", monitor)).list();
 		session.close();
 		return horarios;
+		
+				
+	}
+	
+	public static List<Disciplina> retornaDisciplinasDoMonitor(Monitor monitor){
+		
+		session = (Session) PreparaSessao.pegarSessao();
+		List<Disciplina> disciplinas =  session.createCriteria(Disciplina.class).add(Restrictions.eq("monitor", monitor)).list();
+		session.close();
+		return disciplinas;
 		
 				
 	}

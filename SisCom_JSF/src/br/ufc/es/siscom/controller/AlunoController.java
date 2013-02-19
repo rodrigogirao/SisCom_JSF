@@ -11,19 +11,35 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 import br.ufc.es.siscom.dao.AlunoDAO;
 import br.ufc.es.siscom.dao.DisciplinaDAO;
 import br.ufc.es.siscom.dao.HorarioDAO;
+import br.ufc.es.siscom.dao.MonitorDAO;
+import br.ufc.es.siscom.dao.OrientadorDAO;
 import br.ufc.es.siscom.model.Aluno;
 import br.ufc.es.siscom.model.Disciplina;
 import br.ufc.es.siscom.model.Horario;
+import br.ufc.es.siscom.model.Monitor;
+import br.ufc.es.siscom.model.Orientador;
 
 @ManagedBean(name = "alunoController")
 @SessionScoped
 public class AlunoController {
 	private Aluno aluno = new Aluno();
 	private ArrayList<String> nomeDisciplinasSelecionadas;
-	private ArrayList<Aluno> alunos;
+	private ArrayList<Aluno> alunosNaoMonitores;
+	public ArrayList<Aluno> getAlunosNaoMonitores() {
+		return alunosNaoMonitores;
+	}
+
+
+	public void setAlunosNaoMonitores(ArrayList<Aluno> alunosNaoMonitores) {
+		this.alunosNaoMonitores = alunosNaoMonitores;
+	}
+
+
 	private ArrayList<Aluno> todosAlunos;
 	private Map<String, String> todasDisciplinas;
 	private Integer disciplina;
@@ -87,8 +103,16 @@ public class AlunoController {
 		return "alunoInicial.xhtml";
 	}
 		
-	public String retornarAlunos(){
-			this.alunos = AlunoDAO.retornarAlunos();
+	public String retornarAlunosNaoMonitores(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true); 
+		Orientador orientador = (Orientador) session.getAttribute("orientador");
+			List<Aluno> alunosNaoOrientados = AlunoDAO.retornarTodosAlunosNaoMonitores(orientador);
+				
+			
+			
+			this.alunosNaoMonitores = (ArrayList<Aluno>) alunosNaoOrientados;
+			
 		return "orientarAlunos.xhtml";
 	}
 	
@@ -100,11 +124,11 @@ public class AlunoController {
 
 	public ArrayList<Aluno> getAlunos() {
 		
-		return alunos;
+		return alunosNaoMonitores;
 	}
 
 	public void setAlunos(ArrayList<Aluno> alunos) {
-		this.alunos = alunos;
+		this.alunosNaoMonitores = alunos;
 	}
 
 	public Integer getDisciplina() {
