@@ -32,7 +32,7 @@ public class OrientadorDAO {
 		session = (Session) PreparaSessao.pegarSessao();
 		Orientador orientador =  (Orientador) session.createCriteria(Orientador.class).add(Restrictions.eq("login", login)).uniqueResult();
 		
-		session.close();
+		//session.close();
 		return orientador;
 	    
 	}

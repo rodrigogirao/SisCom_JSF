@@ -50,8 +50,8 @@
 							<p:outputLabel value="#{msg['deletar']}" />
 						</f:facet>
 						<p:commandLink value="#{msg['deletar']}"
-							action="#{horarioController.deletarHorario}" ajax="false">
-							<f:setPropertyActionListener target="#{horarioController.horario}"
+							action="#{alunoController.deletarHorario}" ajax="false">
+							<f:setPropertyActionListener target="#{alunoController.horario}"
 								value="#{horario}" />
 						</p:commandLink>
 					</p:column>

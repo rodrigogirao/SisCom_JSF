@@ -30,16 +30,6 @@ public class AlunoController {
 	private Aluno aluno = new Aluno();
 	private ArrayList<String> nomeDisciplinasSelecionadas;
 	private ArrayList<Aluno> alunosNaoMonitores;
-	public ArrayList<Aluno> getAlunosNaoMonitores() {
-		return alunosNaoMonitores;
-	}
-
-
-	public void setAlunosNaoMonitores(ArrayList<Aluno> alunosNaoMonitores) {
-		this.alunosNaoMonitores = alunosNaoMonitores;
-	}
-
-
 	private ArrayList<Aluno> todosAlunos;
 	private Map<String, String> todasDisciplinas;
 	private Integer disciplina;
@@ -52,8 +42,8 @@ public class AlunoController {
 	public List<Horario> getHorariosSessao() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
-		LoginController loginController =  (LoginController) session.getAttribute("loginController");
-		horariosSessao = AlunoDAO.retornaHorariosDoAluno(loginController.getAluno());
+		Aluno aluno =  (Aluno) session.getAttribute("aluno");
+		horariosSessao = aluno.getHorarios();
 		return horariosSessao;
 	}
 	
@@ -98,8 +88,18 @@ public class AlunoController {
 	public String confirmarHorario(){
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
-		LoginController loginController =  (LoginController) session.getAttribute("loginController");
-		AlunoDAO.associarAlunoAoHorario(loginController.getAluno().getId(), horario);
+		Aluno aluno =  (Aluno) session.getAttribute("aluno");
+		aluno.getHorarios().add(horario);
+		AlunoDAO.atualizarAluno(aluno);
+		return "alunoInicial.xhtml";
+	}
+	
+	public String deletarHorario(){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
+		HttpSession session = (HttpSession) externalContext.getSession(true);  
+		Aluno aluno =  (Aluno) session.getAttribute("aluno");
+		aluno.getHorarios().remove(horario);
+		AlunoDAO.atualizarAluno(aluno);
 		return "alunoInicial.xhtml";
 	}
 		
@@ -200,14 +200,27 @@ public class AlunoController {
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
 		Aluno aluno =  (Aluno) session.getAttribute("aluno");
 		List<Disciplina> disciplinasAluno = aluno.getDisciplinas();
-		List<Horario> todosHorarios = HorarioDAO.retornarTodosOsHorarios();
+		List<Horario> horarios = new ArrayList<Horario>();
 		List<Horario> horariosConfirmar = new ArrayList<Horario>();
 		for (Disciplina disciplina : disciplinasAluno) {	
-			for (Horario horario : todosHorarios) {
-				if(horario.getDisciplina()==disciplina){
-					horariosConfirmar.add(horario);
-				}
+			for (Horario horario : disciplina.getHorariosDisciplina()) {
+				horarios.add(horario);
 			}
+		}
+		
+HashMap<String, Horario> todosHorarios = new HashMap<String, Horario>();
+		
+		for (Horario horario : horarios) {
+			todosHorarios.put(horario.getCodigoHorario(), horario);
+		}
+		
+				
+		for (Horario horario : aluno.getHorarios()) {
+			todosHorarios.remove(horario.getCodigoHorario());
+		}
+		
+		for (Horario horario : todosHorarios.values()) {
+			horariosConfirmar.add(horario);
 		}
 		setHorariosParaConfirmar(horariosConfirmar);
 		return horariosParaConfirmar;
@@ -217,7 +230,14 @@ public class AlunoController {
 	public void setHorariosParaConfirmar(List<Horario> horariosParaConfirmar) {
 		this.horariosParaConfirmar = horariosParaConfirmar;
 	}
+	public ArrayList<Aluno> getAlunosNaoMonitores() {
+		return alunosNaoMonitores;
+	}
 
+
+	public void setAlunosNaoMonitores(ArrayList<Aluno> alunosNaoMonitores) {
+		this.alunosNaoMonitores = alunosNaoMonitores;
+	}
 
 	
 	

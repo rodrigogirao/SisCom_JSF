@@ -53,12 +53,12 @@ public class HorarioDAO {
 		Horario horarioDB = (Horario) session.load(Horario.class, horario.getId());
 		session.delete(horarioDB);
 		transaction.commit();
-		session.close();
+		//session.close();
 	}
 	public static List<Horario> retornarTodosOsHorarios() {
 		session = (Session) PreparaSessao.pegarSessao();
 		List<Horario> horarios = session.createCriteria(Horario.class).list();
-		session.close();
+		//session.close();
 		return horarios;
 		
 	}

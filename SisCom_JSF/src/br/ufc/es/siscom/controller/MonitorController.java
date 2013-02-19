@@ -6,11 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.component.dialog.Dialog;
 
 import br.ufc.es.siscom.dao.DisciplinaDAO;
 import br.ufc.es.siscom.dao.MonitorDAO;
@@ -26,13 +29,19 @@ public class MonitorController {
 	private List<Horario> horarios;
 	private List<Horario> horariosSessao;
 	private ArrayList<String> nomeDisciplinasSelecionadas;
-	private Map<String, String> disciplinasMonitor;
-	
-	
+	private Map<String, String> disciplinasMonitor;	
 	
 	public String deletarMonitor(){
-		MonitorDAO.deletarMonitor(monitor);
-		return "orientadorInicial.xhtml";
+		if(monitor.getHorariosMonitor()==null||monitor.getHorariosMonitor().isEmpty()){
+			MonitorDAO.deletarMonitor(monitor);
+			return "orientadorInicial.xhtml";
+		}else{
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Não é possivel deletar Monitor pois ele possui horarios", "Monitor possui horarios");
+	    	FacesContext.getCurrentInstance().addMessage(null, msg);
+	    	return "";
+		}
+		
+		
 	}
 	
 	public String verHorarios(){
@@ -56,8 +65,8 @@ public class MonitorController {
 	public List<Horario> getHorariosSessao() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
-		LoginController loginController =  (LoginController) session.getAttribute("loginController");
-		horariosSessao = MonitorDAO.retornaHorariosPorMatriculaDoMonitor(loginController.getMonitor().getMatricula());
+		Monitor monitor =  (Monitor) session.getAttribute("monitor");
+		horariosSessao = MonitorDAO.retornaHorariosPorMatriculaDoMonitor(monitor.getMatricula());
 		return horariosSessao;
 	}
 	public void setHorariosSessao(List<Horario> horarios) {
@@ -75,9 +84,9 @@ public class MonitorController {
 	public Map<String,String> getDisciplinasMonitor() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext(); 
 		HttpSession session = (HttpSession) externalContext.getSession(true);  
-		LoginController loginController =  (LoginController) session.getAttribute("loginController");
+		Monitor monitor =  (Monitor) session.getAttribute("monitor");
 		
-		List<Disciplina> disciplinass = loginController.getMonitor().getDisciplinas();
+		List<Disciplina> disciplinass =monitor.getDisciplinas();
 		Map<String,String> dis = new HashMap<String, String>();
 		for (Disciplina disciplina : disciplinass) {
 			

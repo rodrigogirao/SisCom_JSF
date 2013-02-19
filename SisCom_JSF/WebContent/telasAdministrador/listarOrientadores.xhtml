@@ -10,6 +10,7 @@
 <ui:composition template="/templates/templateAdministrador.xhtml">
 	<ui:define name="conteudo">
 	<p:panel header="Listar Orientadores">
+	<p:messages/>
 			<h:panelGrid columns="3" cellpadding="10">
 
 		<p:dataTable value="#{orientadorController.orientadores}"

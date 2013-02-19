@@ -22,12 +22,12 @@ import br.ufc.es.siscom.model.Orientador;
 public class Povoa {
 	public static void main(String[] args) {
 
-//		CriarTabelas.reiniciaEsquemaBD();
-//
-//		Administrador admin = new Administrador();
-//		admin.setLogin("admin");
-//		admin.setSenha("admin");
-//		AdministradorDAO.adicionarAdministrador(admin);
+		CriarTabelas.reiniciaEsquemaBD();
+
+		Administrador admin = new Administrador();
+		admin.setLogin("admin");
+		admin.setSenha("admin");
+		AdministradorDAO.adicionarAdministrador(admin);
 
 //		Disciplina disciplina = new Disciplina();
 //		disciplina.setCodigo("QX020");
@@ -53,13 +53,13 @@ public class Povoa {
 //			System.out.println(aluno2.getLogin());
 //		}
 		
-		Orientador orientador = OrientadorDAO.retornaOrientadorPorLogin("fabio");
-		
-		List<Monitor> monitores = MonitorDAO.retornaMonitoresDoOrientador(orientador);
-		
-		for (Monitor aluno2 : monitores) {
-			System.out.println(aluno2.getLogin());
-		}
+//		Orientador orientador = OrientadorDAO.retornaOrientadorPorLogin("fabio");
+//		
+//		List<Monitor> monitores = MonitorDAO.retornaMonitoresDoOrientador(orientador);
+//		
+//		for (Monitor aluno2 : monitores) {
+//			System.out.println(aluno2.getLogin());
+//		}
 //
 //		AlunoController ac = new AlunoController();
 //		ArrayList<String> nomeDisciplinasSelecionadas = new ArrayList<String>();

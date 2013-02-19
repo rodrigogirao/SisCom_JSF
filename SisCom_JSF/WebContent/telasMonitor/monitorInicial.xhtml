@@ -12,6 +12,7 @@
 <ui:composition template="/templates/templateMonitor.xhtml">
 	<ui:define name="conteudo">
 		<p:panel header="#{msg['monitor']}">
+		<p:messages/>
 			<h:panelGrid columns="3" cellpadding="10">
 				<p:dataTable value="#{monitorController.horariosSessao}" var="horario">
 					<p:column>

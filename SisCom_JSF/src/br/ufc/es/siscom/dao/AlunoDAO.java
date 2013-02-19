@@ -32,7 +32,7 @@ public class AlunoDAO{
 	public static ArrayList<Aluno> retornarAlunos() {
 		session = (Session) PreparaSessao.pegarSessao();
 		ArrayList<Aluno> alunos = (ArrayList<Aluno>) session.createCriteria(Aluno.class).list();
-		session.close();
+		//session.close();
 		return alunos;
 
     }
@@ -76,7 +76,7 @@ public class AlunoDAO{
 	public static Aluno retornaAlunoPorLogin(String login){
 		session = (Session) PreparaSessao.pegarSessao();
 		Aluno aluno = (Aluno) session.createCriteria(Aluno.class).add(Restrictions.eq("login", login)).uniqueResult();
-		session.close();
+		//session.close();
 		return aluno;
 	}
 	
@@ -110,7 +110,7 @@ public class AlunoDAO{
 		alunoDB = novoAluno;
 		session.update(alunoDB);
 		transaction.commit();
-		session.close();
+		//session.close();
 	}
 
 	public static List<Horario> retornaHorariosDoAluno(Aluno aluno) {

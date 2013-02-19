@@ -3,6 +3,7 @@ package br.ufc.es.siscom.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -82,8 +83,16 @@ public class OrientadorController {
 	
 	public String deletarOrientador()
 	{
-		OrientadorDAO.deletarOrientador(orientador);
-		return "listarOrientadores.xhtml";
+		List<Monitor> monitores = MonitorDAO.retornaMonitoresDoOrientador(orientador);
+		if(monitores==null||monitores.isEmpty()){
+			OrientadorDAO.deletarOrientador(orientador);
+			return "listarOrientadores.xhtml";
+		}
+		else{
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Não é possivel deletar Orientador pois ele possui monitores","possui monitores");
+	    	FacesContext.getCurrentInstance().addMessage(null, msg);
+	    	return "";
+		}
 	}
 	
 	public String atualizarOrientador()
